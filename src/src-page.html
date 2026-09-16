@@ -1,0 +1,806 @@
+<title>Cruce de los Andes 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#f2f2ee;
+    --surface:#ffffff;
+    --surface-2:#ecedE8;
+    --surface-3:#e4e6e0;
+    --ink:#131a1f;
+    --ink-2:#4b545b;
+    --ink-3:#6e777e;
+    --line:#e0e2dd;
+    --line-2:#c6cac4;
+    --brk:#93a8b5;
+    --accent:#1b4d6b;
+    --accent-soft:#e7eff4;
+    /* intensity ramp — one hue, light to dark */
+    --i-rec:#e2eaf0;
+    --i-easy:#b2cadb;
+    --i-mid:#5f93b5;
+    --i-hard:#1b4d6b;
+    /* chart series */
+    --s1:#2a78d6;
+    --s2:#eb6834;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:840px;margin:0 auto;padding-inline:16px;padding-block:0 56px}
+  h1,h2{margin:0;text-wrap:balance}
+  p{margin:0}
+  :focus-visible{outline:2px solid var(--s1);outline-offset:2px;border-radius:3px}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- header ---------- */
+  header.top{padding-block:30px 22px;border-bottom:1px solid var(--line)}
+  h1{font-family:"Barlow Condensed","IBM Plex Sans",sans-serif;font-weight:700;
+    font-size:clamp(40px,10.5vw,68px);line-height:.94;text-transform:uppercase;margin-block:6px 10px}
+  .objective{color:var(--ink-2);max-width:56ch}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:16px;
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;
+    color:var(--ink-3);text-transform:uppercase}
+  .meta b{color:var(--ink-2);font-weight:500}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  button.ctl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;background:var(--surface);color:var(--ink-2);
+    border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;cursor:pointer}
+  button.ctl:hover{border-color:var(--accent);color:var(--ink)}
+  button.ctl[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  /* ---------- sticky week nav ---------- */
+  nav.weeks{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+    background:rgba(242,242,238,.93);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+  .weeks-inner{display:flex;align-items:center;gap:8px;overflow-x:auto;padding-block:9px;scrollbar-width:none}
+  .weeks-inner::-webkit-scrollbar{display:none}
+  .weeks-inner .lbl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-3);flex:none}
+  .pill{flex:none;font-family:"IBM Plex Mono",monospace;font-size:12px;
+    padding:5px 10px;border-radius:999px;border:1px solid var(--line-2);
+    background:var(--surface);color:var(--ink-2);text-decoration:none}
+  .pill:hover{border-color:var(--accent);color:var(--ink)}
+  .pill[data-now="1"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+
+  /* ---------- sections ---------- */
+  section{padding-block:34px 0;scroll-margin-top:64px}
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;margin-bottom:14px}
+  h2{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:26px;
+    text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
+  .sechead .note{font-size:12.5px;color:var(--ink-3)}
+
+  /* ---------- chart ---------- */
+  .chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    padding:16px 14px 12px;--keyw:26px;--valw:80px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:14px}
+  .lg{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2)}
+  .sw{width:11px;height:11px;border-radius:2px;flex:none}
+  .sw.d1{background:var(--s1)}
+  .sw.d2{background:var(--s2)}
+  .sw.opt{background:transparent;border:1px dashed var(--line-2)}
+  .rows{position:relative;display:grid;gap:5px}
+  .grid{position:absolute;inset:0 var(--valw) 0 var(--keyw);pointer-events:none}
+  .grid i{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+  .row{display:grid;grid-template-columns:var(--keyw) 1fr var(--valw);align-items:center;position:relative;z-index:1}
+  .row .k{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .row[data-now="1"] .k,.row[data-now="1"] .val{color:var(--ink);font-weight:600}
+  .track{position:relative;height:20px;display:flex;align-items:stretch;gap:2px}
+  .seg-bar{min-width:2px}
+  .seg-bar:last-child{border-radius:0 4px 4px 0}
+  .seg-bar.d1{background:var(--s1)}
+  .seg-bar.d2{background:var(--s2)}
+  .seg-bar.opt{border:1px dashed var(--s1)}
+  .val{font-family:"IBM Plex Mono",monospace;font-size:11px;font-variant-numeric:tabular-nums;
+    color:var(--ink-2);text-align:right;white-space:nowrap;padding-left:8px}
+  .axis{display:grid;grid-template-columns:var(--keyw) 1fr var(--valw);margin-top:8px}
+  .axis .ticks{position:relative;height:14px}
+  .axis .ticks span{position:absolute;top:0;transform:translateX(-50%);
+    font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .axis .ticks span:first-child{transform:none}
+  .axis .unit{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);
+    text-align:right;padding-left:8px;letter-spacing:.08em}
+  .chart .foot{margin-top:10px;font-size:11.5px;color:var(--ink-3);line-height:1.45}
+  #tip{position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s;
+    background:var(--ink);color:#fff;border-radius:6px;padding:7px 9px;font-size:12px;
+    line-height:1.35;max-width:230px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+  #tip b{font-family:"IBM Plex Mono",monospace;display:block;font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;opacity:.65;margin-bottom:2px}
+
+  /* ---------- week cards ---------- */
+  .wk{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    margin-bottom:12px;overflow:hidden;scroll-margin-top:64px}
+  .wk[data-now="1"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+  .wk-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:13px 16px;
+    border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .wk-n{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:23px;
+    text-transform:uppercase;letter-spacing:.02em;line-height:1}
+  .wk-d{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3)}
+  .now-tag{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10px;
+    letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;
+    padding:3px 8px;border-radius:999px;font-weight:600}
+  ol.ses{list-style:none;margin:0;padding:0}
+  ol.ses > li{display:grid;grid-template-columns:96px 1fr;gap:0 14px;padding:12px 16px;border-top:1px solid var(--line)}
+  ol.ses > li:first-child{border-top:none}
+  ol.ses > li.fds{background:var(--accent-soft)}
+  .k-col{display:flex;flex-direction:column;gap:3px}
+  .k-name{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--ink-2);font-weight:500}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .body-col{min-width:0}
+  .title{font-size:14.5px;line-height:1.45}
+  .title .q{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:13.5px;color:var(--ink);
+    background:var(--surface-2);padding:0 3px;border-radius:3px;font-variant-numeric:tabular-nums}
+  ol.ses > li.fds .title .q{background:var(--surface)}
+  .subline{display:flex;gap:8px;margin-top:6px}
+  .subline:first-child{margin-top:0}
+  .subline .d{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-3);padding-top:3px;flex:none}
+
+  details.work{margin-top:9px}
+  details.work > summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--accent);font-weight:500;border:1px solid var(--line-2);border-radius:999px;padding:3px 10px}
+  details.work > summary::-webkit-details-marker{display:none}
+  details.work > summary:hover{border-color:var(--accent)}
+  details.work > summary .ar{transition:transform .15s}
+  details.work[open] > summary .ar{transform:rotate(90deg)}
+
+  /* ---------- workout diagram ---------- */
+  .wo{margin-top:10px;padding:13px 14px;background:var(--surface-2);
+    border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;gap:9px}
+  ol.ses > li.fds .wo{background:var(--surface)}
+  .wo-t{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--ink);font-weight:600}
+
+  /* a single effort */
+  .ef{display:grid;grid-template-columns:6px 74px 1fr;align-items:stretch;gap:0;
+    background:var(--surface);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  ol.ses > li.fds .ef{background:var(--surface-2)}
+  .ef .rail{background:var(--i-mid)}
+  .ef[data-i="rec"]  .rail{background:var(--i-rec)}
+  .ef[data-i="easy"] .rail{background:var(--i-easy)}
+  .ef[data-i="mid"]  .rail{background:var(--i-mid)}
+  .ef[data-i="hard"] .rail{background:var(--i-hard)}
+  .ef[data-i="prog"] .rail{background:linear-gradient(to bottom,var(--i-easy),var(--i-hard))}
+  .ef[data-i="reg"]  .rail{background:linear-gradient(to bottom,var(--i-hard),var(--i-easy))}
+  .ef[data-i="none"] .rail{background:var(--line-2)}
+  .ef .d{font-family:"IBM Plex Mono",monospace;font-size:12px;font-variant-numeric:tabular-nums;
+    font-weight:500;color:var(--ink);padding:6px 0 6px 9px;white-space:nowrap}
+  .ef .l{font-size:13px;color:var(--ink-2);padding:6px 10px 6px 8px;line-height:1.4}
+  .ef.nod{grid-template-columns:6px 1fr}
+  .ef.nod .l{padding-left:11px}
+  .ef .l b{color:var(--ink);font-weight:500}
+
+  /* a repeated group: the bracket */
+  .grp{display:flex;align-items:stretch;gap:7px}
+  .grp > .n{align-self:center;font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+    font-weight:600;color:var(--accent);white-space:nowrap;min-width:26px;text-align:right}
+  .grp > .brk{width:10px;flex:none;border:2px solid var(--brk);border-right:0;border-radius:5px 0 0 5px}
+  .grp > .items{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding-block:3px}
+
+  /* a named block */
+  .blk{display:flex;flex-direction:column;gap:6px}
+  .blk > .h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .blk > .h .nm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:600}
+  .blk > .h .sub{font-size:12px;color:var(--ink-3)}
+  .blk > .bd{display:flex;flex-direction:column;gap:5px}
+
+  /* phase pill (EC / PC / VC) */
+  .ph{display:flex;align-items:center;gap:9px}
+  .ph > .p{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;
+    text-transform:uppercase;background:var(--surface-3);color:var(--ink-2);
+    border-radius:4px;padding:2px 7px;font-weight:600;flex:none}
+  .ph > .x{font-size:13px;color:var(--ink-2)}
+  .ph > .x b{color:var(--ink);font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12.5px}
+
+  .wnote{display:flex;gap:7px;font-size:12.5px;color:var(--ink-2);line-height:1.45}
+  .wnote::before{content:"↳";color:var(--ink-3);flex:none}
+  .wnote.star::before{content:"*"}
+
+  details.raw{margin-top:2px}
+  details.raw > summary{cursor:pointer;list-style:none;font-family:"IBM Plex Mono",monospace;
+    font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  details.raw > summary::-webkit-details-marker{display:none}
+  details.raw > summary:hover{color:var(--accent)}
+  details.raw p{margin-top:7px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+    line-height:1.6;color:var(--ink-3);border-left:2px solid var(--line-2);padding-left:10px}
+
+  /* ---------- appendix ---------- */
+  .lib{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  .lib > summary{cursor:pointer;list-style:none;padding:13px 16px;background:var(--surface-2);
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink);letter-spacing:.03em}
+  .lib > summary::-webkit-details-marker{display:none}
+  .lib > summary .ar{transition:transform .15s;display:inline-block}
+  .lib[open] > summary .ar{transform:rotate(90deg)}
+  .lib-body{padding:4px 16px 14px}
+  .lib-row{padding-block:13px;border-top:1px solid var(--line)}
+  .lib-row:first-child{border-top:none}
+  .lib-row .w{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:7px}
+
+  .key{display:flex;flex-wrap:wrap;gap:8px 18px;background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:14px 16px;margin-bottom:14px}
+  .key .it{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-2)}
+  .key .r{width:5px;height:17px;border-radius:2px;flex:none}
+
+  dl.gloss{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:10px;padding:16px}
+  dl.gloss dt{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
+  dl.gloss dd{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+  footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--ink-3);line-height:1.6}
+
+  @media (max-width:560px){
+    ol.ses > li{grid-template-columns:1fr;gap:6px}
+    .k-col{flex-direction:row;align-items:baseline;gap:8px}
+    .ef{grid-template-columns:6px 62px 1fr}
+    .ef.nod{grid-template-columns:6px 1fr}
+    .ef .d{font-size:11.5px;padding-left:7px}
+    .ef .l{font-size:12.5px}
+    .grp{gap:5px}
+    .grp > .n{min-width:22px;font-size:11.5px}
+    .wo{padding:11px 10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Plan de entrenamiento · Nicolás F.</div>
+    <h1>Cruce de los<br>Andes 2026</h1>
+    <p class="objective">Primeros mesociclos. Objetivo: incremento de volumen con énfasis en el trabajo técnico.</p>
+    <div class="meta">
+      <span><b>8</b> semanas</span>
+      <span><b>31 ago → 25 oct</b> 2026</span>
+      <span><b>4</b> sesiones/semana</span>
+      <span id="km-total"></span>
+    </div>
+    <div class="controls">
+      <button class="ctl" id="btn-open" aria-pressed="false">Abrir todos los trabajos</button>
+    </div>
+  </header>
+
+  <nav class="weeks" aria-label="Ir a la semana"><div class="weeks-inner" id="nav"></div></nav>
+
+  <section id="volumen">
+    <div class="sechead">
+      <h2>Volumen de fondos</h2>
+      <span class="note">Kilómetros de fin de semana por semana</span>
+    </div>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <section id="semanas">
+    <div class="sechead">
+      <h2>Semana a semana</h2>
+      <span class="note">Cada trabajo abre su esquema de bloques</span>
+    </div>
+    <div class="key">
+      <span class="it"><i class="r" style="background:var(--i-hard)"></i>Fuerte / superaeróbico</span>
+      <span class="it"><i class="r" style="background:var(--i-mid)"></i>Moderado</span>
+      <span class="it"><i class="r" style="background:var(--i-easy)"></i>Suave / subaeróbico</span>
+      <span class="it"><i class="r" style="background:var(--i-rec)"></i>Recuperación / pausa</span>
+      <span class="it"><i class="r" style="background:linear-gradient(to bottom,var(--i-easy),var(--i-hard))"></i>Progresivo</span>
+      <span class="it"><span class="mono" style="color:var(--accent);font-weight:600">×3</span> repetir el bloque</span>
+    </div>
+    <div id="weeks"></div>
+  </section>
+
+  <section id="biblioteca">
+    <div class="sechead">
+      <h2>Biblioteca de trabajos</h2>
+      <span class="note">Los mismos esquemas, agrupados por tipo</span>
+    </div>
+    <div id="libs"></div>
+  </section>
+
+  <section id="glosario">
+    <div class="sechead"><h2>Glosario</h2></div>
+    <dl class="gloss">
+      <dt>EC</dt><dd>Entrada en calor.</dd>
+      <dt>PC</dt><dd>Parte central — el trabajo principal de la sesión.</dd>
+      <dt>VC</dt><dd>Vuelta a la calma.</dd>
+      <dt>Subaeróbico</dt><dd>Ritmo cómodo, conversable. Por debajo del umbral.</dd>
+      <dt>Superaeróbico</dt><dd>Ritmo exigente sostenido, en torno al umbral.</dd>
+      <dt>Fartlek</dt><dd>Cambios de ritmo libres, sin pausas medidas.</dd>
+      <dt>Macropausa</dt><dd>Pausa larga entre bloques, normalmente trotando suave.</dd>
+      <dt>Parabrisas</dt><dd>Ida y vuelta completa por las dos cuestas del Buceo, como el barrido de un limpiaparabrisas.</dd>
+      <dt>Fondo</dt><dd>La salida larga de la semana.</dd>
+    </dl>
+  </section>
+
+  <footer>
+    Transcripción del plan entregado por el profe —
+    <span class="mono" style="font-size:11px">PLAN NICOLAS F PRIMEROS MESOCICLOS CRUCE DE LOS ANDES 2026.xlsx</span>.
+    Cada trabajo guarda debajo el <em>texto tal cual la planilla</em>: el esquema de bloques es una lectura de ese texto, así que ante cualquier duda manda el original.
+  </footer>
+</div>
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+/* =================================================================== model */
+const S  = (d,l,i)      => ({t:"s", d, l, i:i||"none"});        // un esfuerzo
+const R  = (reps,items,note) => ({t:"r", reps, items, note});    // grupo repetido (llave)
+const B  = (nm,items,sub)    => ({t:"b", nm, items, sub});       // bloque con nombre
+const P  = (p,x)        => ({t:"p", p, x});                      // fase: EC / PC / VC
+const N  = (x)          => ({t:"n", x});                         // nota
+const NS = (x)          => ({t:"n", x, star:true});              // nota con asterisco
+
+/* =================================================================== data */
+const LIB = {
+  cuestas:{
+    name:"Trabajo de cuestas — Buceo",
+    items:{
+      1:{ title:"Mix cuestas",
+        raw:`MIX CUESTAS: BLOQUE 1: 3 CUESTAS ADUANA DE ORIBE + BLOQUE 2: 3 CUESTAS RAMBLA DESDE 26 DE MARZO HASTA MOJON LICEO FRANCES + BLOQUE 3: 3 CUESTAS LICEO FRANCES + BLOQUE 4: 3 CUESTAS POR CALLE CONTRA CEMENTERIO, DESDE RAMBLA HASTA PALMERA + BLOQUE 5: 3 CUESTAS BUCEO OESTE + BLOQUE 6: 3 CUESTAS ADUANA DE ORIBE.`,
+        wo:[
+          B("Bloque 1",[R(3,[S("","Cuesta <b>Aduana de Oribe</b>","hard")])]),
+          B("Bloque 2",[R(3,[S("","Cuestas de la <b>rambla</b>, desde 26 de Marzo hasta el mojón del Liceo Francés","hard")])]),
+          B("Bloque 3",[R(3,[S("","Cuesta <b>Liceo Francés</b>","hard")])]),
+          B("Bloque 4",[R(3,[S("","Cuesta por la <b>calle contra el Cementerio</b>, desde la rambla hasta la palmera","hard")])]),
+          B("Bloque 5",[R(3,[S("","Cuesta <b>Buceo Oeste</b>","hard")])]),
+          B("Bloque 6",[R(3,[S("","Cuesta <b>Aduana de Oribe</b>","hard")])])
+        ]},
+      4:{ title:"Circuitos parabrisas — Buceo",
+        raw:`CIRCUITOS PARABRISAS BUCEO, BLOQUE 1) 3 PARABRISAS INICIANDO BUCEO OESTE HASTA FIN DE BUCEO ESTE C/ENFASIS EN SUBIDA (SUBO FUERTE, BAJO SUAVE) + AL TERMINAR LOS 3 PARABRISAS, HAGO TROTE SUAVE X RAMBLA HASTA BUCEO ESTE + BLOQUE 2) 3 PARABRISAS C/ENFASIS EN BAJADA (SUBO SUAVE, BAJO FUERTE). *EN AMBOS CASOS CADA PARABRISAS MAS RAPIDO QUE EL ANTERIOR (1 SUAVE, 1 MEDIO, 1 FUERTE)`,
+        wo:[
+          B("Bloque 1",[
+            R(3,[S("","<b>Parabrisas</b>: arranco en Buceo Oeste hasta el fin de Buceo Este","hard")],
+              "Énfasis en la subida: subo fuerte, bajo suave."),
+            S("","Trote suave por la rambla hasta Buceo Este","rec")
+          ],"énfasis en subida"),
+          B("Bloque 2",[
+            R(3,[S("","<b>Parabrisas</b>","hard")],"Énfasis en la bajada: subo suave, bajo fuerte.")
+          ],"énfasis en bajada"),
+          NS("En los dos bloques, cada parabrisas más rápido que el anterior: 1 suave, 1 medio, 1 fuerte.")
+        ]},
+      5:{ title:"Ataque a la fortaleza — Buceo",
+        raw:`ATAQUE A LA FORTALEZA BUCEO: 1 SUBIDA BUCEO OESTE + 1 SUBIDA CUESTA A IZQ DE ESCALERA, BAJO POR ESCALERA, + CUESTA A DERECHA DE ESCALERA + 1 SUBIDA POR CUESTA BUCEO ESTE. REPITO CUESTA ESTE E INCIO EL RECORRIDO EN SENTIDO INVERSO (HACER 4 ATAQUES EN TOTAL, 2 PARA CADA LADO)`,
+        wo:[
+          R(4,[
+            B("Un ataque",[
+              S("","Subida por <b>Buceo Oeste</b>","hard"),
+              S("","Subida por la cuesta a la <b>izquierda de la escalera</b>","hard"),
+              S("","Bajo por la escalera","rec"),
+              S("","Cuesta a la <b>derecha de la escalera</b>","hard"),
+              S("","Subida por la cuesta <b>Buceo Este</b>","hard")
+            ])
+          ],"Repito la cuesta Este y arranco el recorrido en sentido inverso. 4 ataques en total: 2 para cada lado.")
+        ]},
+      7:{ title:"Circuitos en tenaza, progresivo",
+        raw:`3 CIRCUITOS EN TENAZA PROGRESIVO. 1) SUBIDA POR BUCEO OESTE FUERTE, BAJO RECUPERANDO. DOBLO POR RAMBLA Y CONTINUO HASTA CUESTA (IZQ) DE LA ESCALERA DEL MEDIO, BAJO POR ESCALERA Y REPITO 2) IGUAL PERO C/2 SUBIDAS 3) IGUAL PERO CON TRES SUBIDAS. TROTE SUAVE Y REPITO PARA EL LADO ESTE (EN ESE CASO SUBO POR CUESTA DEL LADO DERECHO DE LA ESCALERA`,
+        wo:[
+          B("Circuito 1",[
+            R(1,[
+              S("","Subida por <b>Buceo Oeste</b> fuerte","hard"),
+              S("","Bajo recuperando","rec"),
+              S("","Doblo por la rambla hasta la cuesta izquierda de la escalera del medio","mid"),
+              S("","Bajo por la escalera","rec")
+            ])
+          ],"1 subida"),
+          B("Circuito 2",[S("×2","Lo mismo, pero con <b>2 subidas</b>","hard")]),
+          B("Circuito 3",[S("×3","Lo mismo, pero con <b>3 subidas</b>","hard")]),
+          N("Trote suave y repito todo para el lado Este — ahí subo por la cuesta del lado derecho de la escalera.")
+        ]}
+    }
+  },
+  ritmos:{
+    name:"Trabajo de ritmos",
+    items:{
+      1:{ title:"Bloques de ritmo, sobre circuito con desnivel",
+        raw:`BLOQUE 1: 6 X (30 SEG RITMO FUERTE + 30 SEG RITMO SUAVE) + BLOQUE 2: 2 X (2 MIN RITMO FUERTE + 1 MIN RITMO SUAVE) + BLOQUE 3: 3 X (60 SEG RITMO FUERTE + 60 SEG RITMO SUAVE) + BLOQUE 4 = B2 + BLOQUE 5 = B1 + BLOQUE 5 = B2 C/ 1 MIN CAMINANDO ENTRE C/BLOQUE. BLOQUE 1: 4 X (2 MIN FUERTE + 1 MIN SUAVE) + BLOQUE 2: 3 X (3 MIN FUERTE + 1 MIN SUAVE) + BLOQUE 1. ENTRE C/BLOQUE 1 MIN TROTE SUAVE. *SOBRE CIRCUITO C/DESNIVEL`,
+        wo:[
+          B("Bloque 1",[R(6,[S("30 seg","Ritmo fuerte","hard"),S("30 seg","Ritmo suave","easy")])]),
+          B("Bloque 2",[R(2,[S("2 min","Ritmo fuerte","hard"),S("1 min","Ritmo suave","easy")])]),
+          B("Bloque 3",[R(3,[S("60 seg","Ritmo fuerte","hard"),S("60 seg","Ritmo suave","easy")])]),
+          B("Bloque 4",[S("=","Igual que el bloque 2","mid")]),
+          B("Bloque 5",[S("=","Igual que el bloque 1","mid")]),
+          B("Bloque 5",[S("=","Igual que el bloque 2","mid")],"así figura en la planilla"),
+          N("1 min caminando entre cada bloque."),
+          N("A partir de acá la planilla vuelve a numerar desde el bloque 1:"),
+          B("Bloque 1",[R(4,[S("2 min","Fuerte","hard"),S("1 min","Suave","easy")])]),
+          B("Bloque 2",[R(3,[S("3 min","Fuerte","hard"),S("1 min","Suave","easy")])]),
+          B("Bloque 1",[S("=","Otra vez el bloque 1","mid")]),
+          N("1 min de trote suave entre cada bloque."),
+          NS("Sobre circuito con desnivel.")
+        ]},
+      2:{ title:"Bloque de ritmo en escalera, sobre plano",
+        raw:`BLOQUE RITMO: (2 MIN RITMO FUERTE + 1 MIN RITMO SUAVE + 3 MIN RITMO FUERTE + 1,5 MIN RITMO SUAVE + 4 MIN RITMO FUERTE + 2 MIN RITMO SUAVE) C/1 MIN DE MACROPAUSA CAMINANDO Y REPITO 2 VECES MAS MISMO BLOQUE. * HACERLO SOBRE RECORRIDO PLANO`,
+        wo:[
+          R(3,[
+            S("2 min","Ritmo fuerte","hard"),   S("1 min","Ritmo suave","easy"),
+            S("3 min","Ritmo fuerte","hard"),   S("1,5 min","Ritmo suave","easy"),
+            S("4 min","Ritmo fuerte","hard"),   S("2 min","Ritmo suave","easy")
+          ],"1 min de macropausa caminando entre bloque y bloque."),
+          NS("Sobre recorrido plano.")
+        ]},
+      3:{ title:"Tres bloques de intervalos",
+        raw:`3 BLOQUES : 2 X BLOQUE 1: 6 X (30 SEG RITMO FUERTE + 30 SEG RITMO SUAVE) + 2 X BLOQUE 2: 3 X (60 SEG RITMO FUERTE + 60 SEG RITMO SUAVE) + BLOQUE 3: 2 X (90 SEG RITMO FUERTE + 90 SEG RITMO SUAVE). 1 MIN PAUSA TROTE SUAVE ENTRE C/BLOQUES`,
+        wo:[
+          B("Bloque 1",[R(2,[R(6,[S("30 seg","Ritmo fuerte","hard"),S("30 seg","Ritmo suave","easy")])])],"se hace 2 veces"),
+          B("Bloque 2",[R(2,[R(3,[S("60 seg","Ritmo fuerte","hard"),S("60 seg","Ritmo suave","easy")])])],"se hace 2 veces"),
+          B("Bloque 3",[R(2,[S("90 seg","Ritmo fuerte","hard"),S("90 seg","Ritmo suave","easy")])]),
+          N("1 min de pausa en trote suave entre bloque y bloque.")
+        ]},
+      4:{ title:"Progresivos, sobre circuito con desnivel",
+        raw:`PC: 5 MIN PROG. + BLOQUE 1: 6 X (40 SEG PROGRESIVOS C/20 SEG RECUPERACIÓN) + 2 MIN TROTE SUAVE + BLOQUE 2: 6 X (60 SEG PROGRESIVOS + 30 SEG RECUP) + 2 MIN TROTE SUAVE + BLOQUE 3: 3 (2 MIN PROGRESIVOS C/60 SEG RECUP) + 5 MIN REGRESIVO. *SOBRE CIRCUITO C/DESNIVEL`,
+        wo:[
+          S("5 min","Progresivo de entrada","prog"),
+          B("Bloque 1",[R(6,[S("40 seg","Progresivo","prog"),S("20 seg","Recuperación","rec")])]),
+          S("2 min","Trote suave","easy"),
+          B("Bloque 2",[R(6,[S("60 seg","Progresivo","prog"),S("30 seg","Recuperación","rec")])]),
+          S("2 min","Trote suave","easy"),
+          B("Bloque 3",[R(3,[S("2 min","Progresivo","prog"),S("60 seg","Recuperación","rec")])]),
+          S("5 min","Regresivo","reg"),
+          NS("Sobre circuito con desnivel.")
+        ]},
+      8:{ title:"Pirámide de ritmo",
+        raw:`PIRÁMIDE RITMO: 4 X (30 SEG R.FUERTE + 30 SEG R.SUAVE + 60 SEG R.FUERTE + 60 SEG R.SUAVE + 90 SEG R.FUERTE + 90 SEG R.SUAVE ) C/2 MIN TROTE SUAVE ENTRE CADA PIRÁMIDE.`,
+        wo:[
+          R(4,[
+            S("30 seg","Ritmo fuerte","hard"), S("30 seg","Ritmo suave","easy"),
+            S("60 seg","Ritmo fuerte","hard"), S("60 seg","Ritmo suave","easy"),
+            S("90 seg","Ritmo fuerte","hard"), S("90 seg","Ritmo suave","easy")
+          ],"2 min de trote suave entre cada pirámide.")
+        ]}
+    }
+  },
+  ritmoCuestas:{
+    name:"Trabajo de ritmo con cuestas — Buceo",
+    items:{
+      2:{ title:"Circuito con cambios de ritmo por tramo",
+        raw:`CIRCUITO C/CAMBIOS DE RITMO: BLOQUE 1: 1ER TRAMO: DESDE ESCALERA HASTA BUCEO OESTE (SUAVE) + 2DO TRAMO: 1/2 BUCEO OESTE (FUERTE) + 3ER TRAMO: 2DA 1/2 MITAD BUCEO W (SUAVE) + 4TO TRAMO: PROPIOS HASTA VERDI (FUERTE). BLOQUE 2: 1ER TRAMO: PROPIOS DESDE VERDI HASTA CUESTA (SUAVE) + 2DO TRAMO 1/2 CUESTA BUDEO ESTE (FUERTE) + 3ER TRAMO: 2DA 1/2 BUCEO ESTE SUAVE (SUAVE) + RAMBLA HASTA LA ESCALERA CENTRAL (FUERTE). REPITO ESOS BLOQUES PERO EN SENTIDO CONTRARIO. AL FINALIZAR UN IDA Y VUELTA MACROPAUSA POR RAMBLA HASTA KOREANO Y REPITO MISMO TRAMOS. BLOQUE 3 Y 4 IDEM PERO COMENZANDO PRIMER TRAMO FUERTE +. MACROPAUSA +. BLOQUE 5 Y 6 IDEM BLOQUE 1 Y 2.`,
+        wo:[
+          B("Bloque 1",[
+            S("1er tramo","Desde la escalera hasta <b>Buceo Oeste</b>","easy"),
+            S("2do tramo","Primera mitad de <b>Buceo Oeste</b>","hard"),
+            S("3er tramo","Segunda mitad de <b>Buceo O.</b>","easy"),
+            S("4to tramo","<b>Propios</b> hasta <b>Verdi</b>","hard")
+          ]),
+          B("Bloque 2",[
+            S("1er tramo","Propios, desde Verdi hasta la cuesta","easy"),
+            S("2do tramo","Primera mitad de la cuesta <b>Buceo Este</b>","hard"),
+            S("3er tramo","Segunda mitad de <b>Buceo Este</b>","easy"),
+            S("4to tramo","Rambla hasta la <b>escalera central</b>","hard")
+          ]),
+          N("Repito esos dos bloques pero en sentido contrario. Al terminar la ida y vuelta, macropausa por la rambla hasta el Koreano y repito los mismos tramos."),
+          B("Bloques 3 y 4",[S("=","Ídem 1 y 2, pero <b>arrancando el primer tramo fuerte</b>","hard")]),
+          N("Macropausa."),
+          B("Bloques 5 y 6",[S("=","Ídem bloques 1 y 2","mid")])
+        ]},
+      3:{ title:"Cuesta dividida en tercios",
+        raw:`SOBRE CUESTA BUCEO O, LA DIVIDO EN 3 TRAMOS Y SIEMPRE BAJO HASTA EL INICIO: BLOQUE 1: ENFASIS EN SUBIDA. SUBO 1/3 + SUBO 2/3 + SUBO 3/3 + 2/3 + 1/3 + MACROPAUSA X RAMBLA Y REPITO IDEM X BUCEO E. AL FINALIZAR, MACROPAUSA X RAMBLA, SUBO SUAVE ESCALERA. BLOQUE 2: IDEM BLOQUE ANTERIOR HACIENDO ÉNFASIS EN BAJADA Y LA SUBIDA RECUP. AL FINALIZAR TRABAJO SOBRE BUCEO O., MACROPAUSA CANTERO PROPIOS HASTA VERDI, REGRESO Y REPITO X BUCEO E.`,
+        wo:[
+          N("Sobre la cuesta de <b>Buceo Oeste</b>, dividida en 3 tramos. Siempre bajo hasta el inicio."),
+          B("Bloque 1",[
+            S("1/3","Subo el primer tercio","hard"),
+            S("2/3","Subo dos tercios","hard"),
+            S("3/3","Subo la cuesta entera","hard"),
+            S("2/3","Subo dos tercios","hard"),
+            S("1/3","Subo el primer tercio","hard"),
+            S("","Macropausa por la rambla","rec"),
+            S("=","Repito lo mismo por <b>Buceo Este</b>","hard"),
+            S("","Macropausa por la rambla y subo suave la escalera","rec")
+          ],"énfasis en la subida"),
+          B("Bloque 2",[
+            S("=","Ídem el bloque anterior, pero con el énfasis en la <b>bajada</b>; la subida es recuperación","hard"),
+            S("","Macropausa: cantero de Propios hasta Verdi, regreso","rec"),
+            S("=","Repito por <b>Buceo Este</b>","hard")
+          ],"énfasis en la bajada")
+        ]},
+      6:{ title:"Circuito “0” con cambios de ritmo",
+        raw:`CIRCUITO "0" CON CAMBIO DE RITMOS POR TRAMO. DIVIDO EL 0 GRANDE EN 4 TRAMOS. (1ER TRAMO RAMBLA DESDE ESCALERA HASTA BUCEO ESTE - 2DO TRAMO BUCEO ESTE - 3ER TRAMO BUCEO OESTE - 4TO TRAMO RAMBLA DESDE BUCEO OESTE HASTA ESCALERA. ALTERNO 1 TRAMO FUERTE Y 1 TRAMO SUAVE. AL COMPLETAR PRIMER 0, REPITO INICIANDO EN SENTIDO CONTRARIO. AL FINALIZAR AMBOS "0" MACROPAUSA X ESCALERA Y REPITO MISMO TRABAJO INICIANDO BAJANDO X BUCEO ESTE Y AL FINALIZAR X BUCEO OESTE AL COMPLETAR, BAJO LA ESCALERA Y REPITO IDEM PRIMEROS DOS "8" PERO COMENZANDO 1ER TRAMO SUAVE, Y SIGUIENTE FUERTE. TOTAL 6 "0".`,
+        wo:[
+          B("El “0” grande, en 4 tramos",[
+            S("1er tramo","Rambla, desde la escalera hasta <b>Buceo Este</b>","none"),
+            S("2do tramo","<b>Buceo Este</b>","none"),
+            S("3er tramo","<b>Buceo Oeste</b>","none"),
+            S("4to tramo","Rambla, desde Buceo Oeste hasta la escalera","none")
+          ],"alterno 1 tramo fuerte y 1 tramo suave"),
+          B("“0” 1 y 2",[
+            S("0 nº1","Sentido normal","hard"),
+            S("0 nº2","Arrancando en sentido contrario","hard"),
+            S("","Macropausa por la escalera","rec")
+          ]),
+          B("“0” 3 y 4",[
+            S("=","Mismo trabajo, pero empezando bajando por <b>Buceo Este</b> y terminando por <b>Buceo Oeste</b>","hard"),
+            S("","Bajo la escalera","rec")
+          ]),
+          B("“0” 5 y 6",[
+            S("=","Ídem los dos primeros, pero <b>arrancando el 1er tramo suave</b> y el siguiente fuerte","hard")
+          ]),
+          N("Total: 6 “0”.")
+        ]},
+      8:{ title:"Circuito “boomerang”",
+        raw:`CIRCUITO "BOOMERANG". BLOQUE 1. BUCEO OESTE. DIVIDO LA CUESTA EN 2, HAGO ESA CUESTA 3 VECES, REALIZO 2DA MITAD (1/2 HASTA ARRIBA) A RITMO TANTO SUBIDA COMO BAJADA RECUPERO EN LA 1RA MITAD (MITAD - ABAJO). AL TERMINAR MACROPAUSA POR RAMBLA HASTA BUCEO ESTE. BLOQUE 2 IDEM ANTERIOR PERO EN BUCEO E. PAUSA, TROTO POR RAMBLA Y SUBO POR ESCALERA + BLOQUE 3) REPITO 3 CUESTAS BUCEO O CON RITMO EN 1RA MITAD (BAJADA - SUBIDA) RECUPERANDO EN LA 2DA MITAD. + PAUSA BAJADA CUESTA O, RAMBLA Y ESCALERA + BLOQUE 4) IDEM 3 PERO SOBRE BUCEO E`,
+        wo:[
+          N("La cuesta se divide en 2 mitades."),
+          B("Bloque 1 · Buceo Oeste",[
+            R(3,[S("","Cuesta entera: <b>ritmo en la 2da mitad</b> (de la mitad para arriba), subiendo y bajando","hard"),
+                 S("","Recupero en la 1ra mitad (de la mitad para abajo)","rec")]),
+            S("","Macropausa por la rambla hasta Buceo Este","rec")
+          ]),
+          B("Bloque 2 · Buceo Este",[
+            S("=","Ídem el bloque anterior","hard"),
+            S("","Pausa: troto por la rambla y subo por la escalera","rec")
+          ]),
+          B("Bloque 3 · Buceo Oeste",[
+            R(3,[S("","Cuesta con <b>ritmo en la 1ra mitad</b> (bajada y subida)","hard"),
+                 S("","Recupero en la 2da mitad","rec")]),
+            S("","Pausa: bajada cuesta Oeste, rambla y escalera","rec")
+          ]),
+          B("Bloque 4 · Buceo Este",[S("=","Ídem el bloque 3","hard")])
+        ]}
+    }
+  },
+  pasadas:{
+    name:"Trabajo de pasadas",
+    items:{
+      5:{ title:"6 × 1000 en tres grupos",
+        raw:`6 X 1000 MTS (EN 3 GRUPOS DE 2 PASADAS C/U, C/GRUPO MAS RÁPIDO QUE EL ANTERIOR) C/60 SEG DE RECUPERACIÓN ENTRE C/PASADA.`,
+        wo:[
+          R(3,[
+            R(2,[S("1000 mts","Pasada","hard"),S("60 seg","Recuperación","rec")])
+          ],"Cada grupo más rápido que el anterior. 6 pasadas en total."),
+        ]},
+      6:{ title:"3 × 1500 progresivos",
+        raw:`3 X 1500 MTS PROGRESIVO CADA 500 MTS C/90 SEG DE RECUPERACIÓN ENTRE C/PASADA`,
+        wo:[
+          R(3,[S("1500 mts","Progresivo cada 500 mts","prog"),S("90 seg","Recuperación","rec")])
+        ]},
+      7:{ title:"Pasadas en escalera: 1000 · 2000 · 3000",
+        raw:`1 X 1000 MTS C/60 SEG DE RECUP + 1 X 2000 MTS C/120 SEG DE RECUP. + 1 X 3000 MTS.`,
+        wo:[
+          S("1000 mts","Pasada","hard"), S("60 seg","Recuperación","rec"),
+          S("2000 mts","Pasada","hard"), S("120 seg","Recuperación","rec"),
+          S("3000 mts","Pasada","hard")
+        ]}
+    }
+  }
+};
+
+/* sesiones continuas (sesión 3) que también valen la pena esquematizar */
+const CONT = {
+  "1-3":{ title:"Intervalos largos superaeróbicos", wo:[
+    P("EC","<b>10 min</b> de trote suave"),
+    B("PC",[R(4,[S("5 min","Ritmo superaeróbico","hard"),S("5 min","Ritmo subaeróbico","easy")])]),
+    P("VC","<b>10 min</b> de trote suave")
+  ]},
+  "2-3":{ title:"3 × 10 min superaeróbicos", wo:[
+    P("EC","<b>10 min</b> de trote suave"),
+    B("PC",[R(3,[S("10 min","Ritmo superaeróbico","hard"),S("5 min","Ritmo subaeróbico de pausa","easy")])]),
+    P("VC","<b>10 min</b> de trote suave")
+  ]},
+  "3-3":{ title:"2 × 15 min superaeróbicos", wo:[
+    P("EC","<b>10 min</b> de trote suave"),
+    B("PC",[R(2,[S("15 min","Ritmo superaeróbico","hard"),S("10 min","Ritmo subaeróbico de pausa","easy")])]),
+    P("VC","<b>10 min</b> de trote suave")
+  ]},
+  "6-3":{ title:"Tres bloques de 10 min", wo:[
+    P("EC","<b>10 min</b> de trote subaeróbico"),
+    B("PC · 3 bloques de 10 min",[
+      S("10 min","Bloque 1: cambios de pendiente, de superficie, etc.","mid"),
+      S("10 min","Bloque 2: cambios de ritmo en plano","hard"),
+      S("10 min","Bloque 3: ritmo con pendientes, más moderadas que las primeras","mid")
+    ]),
+    P("VC","<b>10 min</b> de trote suave")
+  ]},
+  "7-3":{ title:"30 min continuos superaeróbicos", wo:[
+    P("EC","<b>10 min</b> de trote suave"),
+    B("PC",[S("30 min","Ritmo superaeróbico continuo","hard")]),
+    P("VC","<b>10 min</b> de trote suave")
+  ]},
+  "8-3":{ title:"Fartlek de 60 min", wo:[
+    P("EC","<b>5 min</b> suave"),
+    B("PC",[S("50 min","Fartlek: cambios de ritmo libres","mid")]),
+    P("VC","<b>5 min</b> suave")
+  ]}
+};
+
+const WEEKS = [
+  { n:1, from:"2026-08-31", to:"2026-09-06",
+    s:[{k:"Sesión 1",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",1]},
+       {k:"Sesión 2",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",1]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUAVE + PC: 4 X (5 MIN A RITMO SUPERAEROBICO + 5 MIN RITMO SUBAERÓBICO) + VC: 10 MIN TROTE SUAVE`,cont:"1-3"}],
+    fds:[{d:"Día 1",t:`FONDO 22 - 24 KM PREFERENTEMENTE SOBRE TERRENO TÉCNICO.`}],
+    vol:[{lab:"22–24",km:23,series:"d1",src:"22 - 24 KM"}] },
+  { n:2, from:"2026-09-07", to:"2026-09-13",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",2]},
+       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",2]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUAVE + PC: 3 X (10 MIN A RITMO SUPERAEROBICO) C/5 MIN RITMO SUBAERÓBICO PAUSA + VC: 10 MIN TROTE SUAVE`,cont:"2-3"}],
+    fds:[{d:"Día 1",t:`FONDO 16 KM PREFERENTEMENTE SOBRE CIRCUITO PLANO (SUPERFICIE BLANDA)`},
+         {d:"Día 2",t:`FONDO 14 KM PREFERENTEMENTE SOBRE QUE ALTERNE DESNIVEL, TERRENO VARIADO, ETC`}],
+    vol:[{lab:"16",km:16,series:"d1",src:"16 KM"},{lab:"14",km:14,series:"d2",src:"14 KM"}] },
+  { n:3, from:"2026-09-14", to:"2026-09-20",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",3]},
+       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",3]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUAVE + PC: 2 X (15 MIN A RITMO SUPERAEROBICO) C/10 MIN RITMO SUBAERÓBICO PAUSA + VC: 10 MIN TROTE SUAVE`,cont:"3-3"}],
+    fds:[{d:"Día 1",t:`FONDO 24 - 26 KM PREFERENTEMENTE SOBRE TERRENO TÉCNICO.`}],
+    vol:[{lab:"24–26",km:25,series:"d1",src:"24 - 26 KM"}] },
+  { n:4, from:"2026-09-21", to:"2026-09-27",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",4]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",4]},
+       {k:"Sesión 3",tag:"Opcional",t:`DESCANSO O GIMNASIO / OPCIONAL TROTE SUBAERÓBICO 50 MINUTOS`}],
+    fds:[{d:"Día 1",t:`FONDO 16 KM SOBRE TERRENO PLANO (SUPERFICIE BLANDA, PLAYA, PASTO)`}],
+    vol:[{lab:"16",km:16,series:"d1",src:"16 KM"}] },
+  { n:5, from:"2026-09-28", to:"2026-10-04", race:true,
+    s:[{k:"Sesión 1",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",5]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",5]},
+       {k:"Sesión 3",tag:"Opcional",t:`OPCIONAL: FARTLEK 45 - 50 MINUTOS`}],
+    fds:[{d:"Carrera",t:`DESAFÍO LOS CARANCHOS 16 O 25 KM (PREFERENTEMENTE)`}],
+    vol:[{lab:"16 o 25",km:16,series:"d1",src:"16 O 25 KM · Desafío Los Caranchos"},
+         {lab:"",km:9,series:"opt",src:"Los 9 KM extra si elegís la distancia de 25"}] },
+  { n:6, from:"2026-10-05", to:"2026-10-11",
+    s:[{k:"Sesión 1",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",6]},
+       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",6]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUB + PC: 3 BLOQUES 10 MIN DIVIDIDOS EN: BLOQUE 1: CAMBIO DE PENDIENTES, SUPERFICIE, ETC + BLOQUE 2: 10 MIN CAMBIOS DE RITMO EN PLANO + 10 MIN RITMO C/PENDIENTES (MAS MODERADAS QUE LAS PRIMERAS) + VC: 10 MINUTOS TROTE SUAVE`,cont:"6-3"}],
+    fds:[{d:"Día 1",t:`FONDO 18 KM PREFERENTEMENTE SOBRE CIRCUITO PLANO (SUPERFICIE BLANDA)`},
+         {d:"Día 2",t:`FONDO 20 KM PREFERENTEMENTE SOBRE QUE ALTERNE DESNIVEL, TERRENO VARIADO, ETC`}],
+    vol:[{lab:"18",km:18,series:"d1",src:"18 KM"},{lab:"20",km:20,series:"d2",src:"20 KM"}] },
+  { n:7, from:"2026-10-12", to:"2026-10-18",
+    s:[{k:"Sesión 1",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",7]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",7]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUAVE + PC: 30 MIN A RITMO SUPERAEROBICO + VC: 10 MIN TROTE SUAVE`,cont:"7-3"}],
+    fds:[{d:"Día 1",t:`FONDO 26 - 28 KM PREFERENTEMENTE TÉCNICO (QUE ALTERNE DESNIVEL, TERRENO VARIADO, ETC)`}],
+    vol:[{lab:"26–28",km:27,series:"d1",src:"26 - 28 KM"}] },
+  { n:8, from:"2026-10-19", to:"2026-10-25",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",8]},
+       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",8]},
+       {k:"Sesión 3",tag:"Fartlek",t:`FARTLEK 60 MINUTOS. (EC & VC: 5 MIN SUAVE + 50 MIN FARTLEK)`,cont:"8-3"}],
+    fds:[{d:"Día 1",t:`FONDO 18 KM SOBRE TERRENO PLANO (SUPERFICIE BLANDA, PLAYA, PASTO)`}],
+    vol:[{lab:"18",km:18,series:"d1",src:"18 KM"}] }
+];
+
+/* ============================================================== utilities */
+const MONTHS=["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic"];
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const fmtRange=(a,b)=>{const d1=new Date(a+"T12:00:00"),d2=new Date(b+"T12:00:00");
+  return `${d1.getDate()} ${MONTHS[d1.getMonth()]} – ${d2.getDate()} ${MONTHS[d2.getMonth()]}`;};
+
+const ACCENTS={formacion:"formación",superaerobico:"superaeróbico",aerobico:"aeróbico",
+  rapido:"rápido",mas:"más",recuperacion:"recuperación",tecnico:"técnico"};
+const UPPER=new Set(["km","mts","min","seg","ec","pc","vc"]);
+
+/* Pasa el texto de la planilla (todo en mayúsculas) a algo legible. */
+function legible(raw){
+  let out=raw.toLowerCase().replace(/[a-zà-ÿ0-9./]+/g,w=>{
+    const bare=w.replace(/[.,;:)]+$/,""), tail=w.slice(bare.length);
+    if(UPPER.has(bare)) return bare.toUpperCase()+tail;
+    if(ACCENTS[bare])   return ACCENTS[bare]+tail;
+    return w;
+  });
+  return out.replace(/(^|[.]\s+)([a-zà-ÿ])/g,(m,p,c)=>p+c.toUpperCase());
+}
+function markup(s){
+  return esc(s)
+    .replace(/\b\d+(?:[.,]\d+)?\s?(?:km|mts|min|seg|minutos|segundos)\b/gi,m=>'<span class="q">'+m+'</span>')
+    .replace(/\b\d+\s?[x×](?=\s)/gi,m=>'<span class="q">'+m+'</span>');
+}
+
+/* ========================================================= diagram render */
+function node(n){
+  if(n.t==="s"){
+    return `<div class="ef${n.d?"":" nod"}" data-i="${n.i}"><span class="rail"></span>` +
+           (n.d?`<span class="d">${n.d}</span>`:"") + `<span class="l">${n.l}</span></div>`;
+  }
+  if(n.t==="r"){
+    const inner = `<div class="grp">` +
+      `<span class="n">${n.reps>1?"×"+n.reps:""}</span>` +
+      `<span class="brk"></span>` +
+      `<div class="items">${n.items.map(node).join("")}</div></div>`;
+    return inner + (n.note?`<p class="wnote">${n.note}</p>`:"");
+  }
+  if(n.t==="b"){
+    return `<div class="blk"><div class="h"><span class="nm">${n.nm}</span>` +
+           (n.sub?`<span class="sub">${n.sub}</span>`:"") + `</div>` +
+           `<div class="bd">${n.items.map(node).join("")}</div></div>`;
+  }
+  if(n.t==="p"){
+    return `<div class="ph"><span class="p">${n.p}</span><span class="x">${n.x}</span></div>`;
+  }
+  return `<p class="wnote${n.star?" star":""}">${n.x}</p>`;
+}
+function diagram(w){
+  return `<div class="wo">` +
+    (w.title?`<div class="wo-t">${w.title}</div>`:"") +
+    w.wo.map(node).join("") +
+    (w.raw?`<details class="raw"><summary>Texto tal cual la planilla</summary><p>${esc(w.raw)}</p></details>`:"") +
+    `</div>`;
+}
+
+/* ================================================================== build */
+const todayISO=new Date().toISOString().slice(0,10);
+const nowWeek=WEEKS.find(w=>todayISO>=w.from&&todayISO<=w.to);
+
+document.getElementById("nav").innerHTML='<span class="lbl">Semana</span>'+
+  WEEKS.map(w=>`<a class="pill" href="#s${w.n}"${w===nowWeek?' data-now="1"':''}>${w.n}${w===nowWeek?" · hoy":""}</a>`).join("");
+
+const totalKm=WEEKS.reduce((a,w)=>a+w.vol.filter(v=>v.series!=="opt").reduce((b,v)=>b+v.km,0),0);
+document.getElementById("km-total").innerHTML=`<b>~${totalKm}</b> km de fondos`;
+
+(function chart(){
+  const MAX=40, ticks=[0,10,20,30,40];
+  const rows=WEEKS.map(w=>{
+    const total=w.vol.filter(v=>v.series!=="opt").reduce((a,v)=>a+v.km,0);
+    const solid=w.vol.filter(v=>v.lab&&v.series!=="opt");
+    const label=solid.map(v=>v.lab).join(" + ")+(solid.length>1?` = ${total}`:"");
+    const segs=w.vol.map(v=>`<div class="seg-bar ${v.series}" style="width:${(v.km/MAX*100).toFixed(2)}%" data-tip="${esc(v.src)}" data-w="Semana ${w.n}"></div>`).join("");
+    return `<div class="row" data-wk="${w.n}"${w===nowWeek?' data-now="1"':''}><div class="k">S${w.n}</div>`+
+           `<div class="track">${segs}</div><div class="val">${label}</div></div>`;
+  }).join("");
+  document.getElementById("chart").innerHTML=`
+    <div class="legend">
+      <span class="lg"><i class="sw d1"></i>Día 1 (plano)</span>
+      <span class="lg"><i class="sw d2"></i>Día 2 (técnico)</span>
+      <span class="lg"><i class="sw opt"></i>Distancia opcional</span>
+    </div>
+    <div class="rows">
+      <div class="grid">${ticks.slice(1).map(t=>`<i style="left:${t/MAX*100}%"></i>`).join("")}</div>
+      ${rows}
+    </div>
+    <div class="axis"><div></div><div class="ticks">
+      ${ticks.map(t=>`<span style="left:${t/MAX*100}%">${t}</span>`).join("")}
+    </div><div class="unit">KM</div></div>
+    <p class="foot">Las semanas con rango (22–24 km) se grafican en su punto medio. La semana 5 es el Desafío Los Caranchos: 16 km firmes, los 9 restantes si vas por los 25.</p>`;
+
+  const tip=document.getElementById("tip"), ch=document.getElementById("chart");
+  ch.addEventListener("pointerover",e=>{const s=e.target.closest(".seg-bar");if(!s)return;
+    tip.innerHTML=`<b>${s.dataset.w}</b>${esc(s.dataset.tip)}`;tip.style.opacity=1;});
+  ch.addEventListener("pointermove",e=>{
+    tip.style.left=Math.min(e.clientX+12,innerWidth-tip.offsetWidth-10)+"px";
+    tip.style.top=(e.clientY-tip.offsetHeight-12)+"px";});
+  ch.addEventListener("pointerout",e=>{if(e.target.closest(".seg-bar"))tip.style.opacity=0;});
+})();
+
+document.getElementById("weeks").innerHTML=WEEKS.map(w=>{
+  const sessions=w.s.map(s=>{
+    let work=null;
+    if(s.ref){ const[l,n]=s.ref; work=LIB[l].items[n]; }
+    else if(s.cont){ work=CONT[s.cont]; }
+    const det=work?`<details class="work"${w===nowWeek?" open":""}>
+        <summary><span class="ar">›</span> Ver el trabajo</summary>${diagram(work)}</details>`:"";
+    return `<li>
+      <div class="k-col"><span class="k-name">${s.k}</span><span class="tag">${s.tag}</span></div>
+      <div class="body-col"><div class="title">${markup(legible(s.t))}</div>${det}</div>
+    </li>`;
+  }).join("");
+  const fds=`<li class="fds">
+    <div class="k-col"><span class="k-name">Fin de semana</span><span class="tag">${w.race?"Carrera":"Fondo"}</span></div>
+    <div class="body-col">${w.fds.map(f=>
+      `<div class="subline"><span class="d">${f.d}</span><div class="title">${markup(legible(f.t))}</div></div>`).join("")}</div>
+  </li>`;
+  return `<article class="wk" id="s${w.n}"${w===nowWeek?' data-now="1"':''}>
+    <div class="wk-head"><span class="wk-n">Semana ${w.n}</span>
+      <span class="wk-d">${fmtRange(w.from,w.to)}</span>
+      ${w===nowWeek?'<span class="now-tag">Esta semana</span>':''}</div>
+    <ol class="ses">${sessions}${fds}</ol></article>`;
+}).join("");
+
+document.getElementById("libs").innerHTML=Object.values(LIB).map(l=>`
+  <details class="lib"><summary><span class="ar">›</span>&nbsp; ${l.name} · semanas ${Object.keys(l.items).join(", ")}</summary>
+    <div class="lib-body">${Object.entries(l.items).map(([k,v])=>
+      `<div class="lib-row"><div class="w">Semana ${k}</div>${diagram(v)}</div>`).join("")}</div>
+  </details>`).join("");
+
+const btnOpen=document.getElementById("btn-open");
+btnOpen.addEventListener("click",()=>{
+  const open=btnOpen.getAttribute("aria-pressed")!=="true";
+  btnOpen.setAttribute("aria-pressed",String(open));
+  btnOpen.textContent=open?"Cerrar todos los trabajos":"Abrir todos los trabajos";
+  document.querySelectorAll("#weeks details.work").forEach(d=>d.open=open);
+});
+</script>

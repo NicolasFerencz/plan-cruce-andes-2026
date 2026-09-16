@@ -28,3 +28,19 @@ Queda con ícono propio, a pantalla completa y funciona sin señal.
   bloques es una lectura de ese texto original.
 - Al tocar `index.html`, subir el número de versión del cache en `sw.js` para que
   los celulares que ya lo tengan instalado bajen la versión nueva.
+
+## Regenerar
+
+Las fuentes están en `src/`. `src-page.html` es la página con los datos del plan y
+las funciones de render; el resto es la cadena de armado.
+
+```sh
+cd src
+node build.mjs                 # ejecuta el render y hornea el HTML estático
+python3 build-site.py 2        # lo envuelve como sitio; el número es la versión del cache
+python3 make-icons.py          # sólo si cambian los íconos
+```
+
+`build.mjs` corre el código de render de `src-page.html` contra un DOM simulado y
+escribe el markup ya resuelto: por eso la página se lee aunque el navegador no
+ejecute JavaScript (la vista previa de Archivos en iOS, por ejemplo).
