@@ -1,5 +1,5 @@
 /* Cache-first: una vez abierta, la app funciona sin señal. */
-var CACHE = "plan-cruce-v1";
+var CACHE = "plan-cruce-v2";
 var CORE = ["./", "./index.html", "./manifest.webmanifest",
             "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png",
             "./apple-touch-icon.png", "./favicon-32.png"];

@@ -241,6 +241,11 @@
   dl.gloss dt{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
   dl.gloss dd{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
 
+  .phase{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);font-weight:600;
+    margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line-2)}
+  .phase:first-child{margin-top:0}
+
   footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);
     font-size:12px;color:var(--ink-3);line-height:1.6}
 
@@ -262,10 +267,10 @@
   <header class="top">
     <div class="eyebrow">Plan de entrenamiento · Nicolás F.</div>
     <h1>Cruce de los<br>Andes 2026</h1>
-    <p class="objective">Primeros mesociclos. Objetivo: incremento de volumen con énfasis en el trabajo técnico.</p>
+    <p class="objective">Primeros mesociclos: incremento de volumen con énfasis en el trabajo técnico. Después, el último mesociclo y el tapering hasta la carrera.</p>
     <div class="meta">
-      <span><b>8</b> semanas</span>
-      <span><b>31 ago → 25 oct</b> 2026</span>
+      <span><b>14</b> semanas</span>
+      <span><b>31 ago → 6 dic</b> 2026</span>
       <span><b>4</b> sesiones/semana</span>
       <span id="km-total"></span>
     </div>
@@ -324,8 +329,9 @@
   </section>
 
   <footer>
-    Transcripción del plan entregado por el profe —
-    <span class="mono" style="font-size:11px">PLAN NICOLAS F PRIMEROS MESOCICLOS CRUCE DE LOS ANDES 2026.xlsx</span>.
+    Transcripción de los planes entregados por el profe —
+    <span class="mono" style="font-size:11px">PLAN NICOLAS F PRIMEROS MESOCICLOS CRUCE DE LOS ANDES 2026.xlsx</span> (semanas 1 a 5) y
+    <span class="mono" style="font-size:11px">PLAN CRUCE DE LOS ANDES 2026 ULTIMO MESO &amp; TAPPERING.xlsx</span> (semanas 9 a 17).
     Cada trabajo guarda debajo el <em>texto tal cual la planilla</em>: el esquema de bloques es una lectura de ese texto, así que ante cualquier duda manda el original.
   </footer>
 </div>
@@ -381,8 +387,57 @@ const LIB = {
             ])
           ],"Repito la cuesta Este y arranco el recorrido en sentido inverso. 4 ataques en total: 2 para cada lado.")
         ]},
-      7:{ title:"Circuitos en tenaza, progresivo",
-        raw:`3 CIRCUITOS EN TENAZA PROGRESIVO. 1) SUBIDA POR BUCEO OESTE FUERTE, BAJO RECUPERANDO. DOBLO POR RAMBLA Y CONTINUO HASTA CUESTA (IZQ) DE LA ESCALERA DEL MEDIO, BAJO POR ESCALERA Y REPITO 2) IGUAL PERO C/2 SUBIDAS 3) IGUAL PERO CON TRES SUBIDAS. TROTE SUAVE Y REPITO PARA EL LADO ESTE (EN ESE CASO SUBO POR CUESTA DEL LADO DERECHO DE LA ESCALERA`,
+      10:{ title:"Circuito doble banana",
+        raw:`CIRCUITO DOBLE BANANA: 1ER BLOQUE (BANANA PROPIOS): SALIENDO X CANTERO PROPIOS, COMIENZA EN PROPIOS Y RAMOS, SEGUIR HASTA AV. ITALIA Y REGRESAR, REPITO NUEVAMENTE (HACER TANTO EN LA SUBIDA COMO EN LA BAJADA INTENTO DE AUMENTAR LA VELOCIDAD DE MANERA PROGRESIVA, EN EL SEGMENTO DESDE QUE INICIA LA SUBIDA, HASTA QUE TERMINA) + PAUSA, CANTERO PROPIOS Y BAJO POR CUESTA BUCEO ESTE + 2DO BLOQUE. (BANANA BUCEO):3 PARABRISAS SALIENDO DESDE BUCEO ESTE (1RO Y 3RO C/ENFASIS EN LA SUBIDA, 2DO ENFASIS EN LA BAJADA)`,
+        wo:[
+          B("Bloque 1 · Banana Propios",[
+            R(2,[S("","Por el cantero de <b>Propios</b>, desde Ramos hasta <b>Av. Italia</b> y regreso","prog")],
+              "Subiendo y bajando: aumento la velocidad de forma progresiva en el tramo de la cuesta, desde que empieza hasta que termina."),
+            S("","Pausa: cantero de Propios y bajo por la cuesta <b>Buceo Este</b>","rec")
+          ]),
+          B("Bloque 2 · Banana Buceo",[
+            S("1º","<b>Parabrisas</b> desde Buceo Este — énfasis en la subida","hard"),
+            S("2º","<b>Parabrisas</b> — énfasis en la bajada","hard"),
+            S("3º","<b>Parabrisas</b> — énfasis en la subida","hard")
+          ])
+        ]},
+      11:{ title:"Mix cuestas — Buceo y Propios",
+        raw:`MIX CUESTAS: BLOQUE 1: 2 PARABRISAS COMENZANDO X BUCEO OESTE + 3 CUESTAS LADO IZQ ESCALERA BUCEO + 2 CUESTAS PROPIOS (SANTIAGO RIVAS - RAMOS) + BLOQUE 2: 2 PARABRISAS COMENZANDO X BUCEO ESTE + 3 CUESTAS LADO DER ESCALERA BUCEO + 2 CUESTAS PROPIOS (SANTIAGO RIVAS - RAMOS)`,
+        wo:[
+          B("Bloque 1",[
+            R(2,[S("","<b>Parabrisas</b> arrancando por Buceo Oeste","hard")]),
+            R(3,[S("","Cuesta del lado <b>izquierdo de la escalera</b> del Buceo","hard")]),
+            R(2,[S("","Cuesta de <b>Propios</b> (Santiago Rivas – Ramos)","hard")])
+          ]),
+          B("Bloque 2",[
+            R(2,[S("","<b>Parabrisas</b> arrancando por Buceo Este","hard")]),
+            R(3,[S("","Cuesta del lado <b>derecho de la escalera</b> del Buceo","hard")]),
+            R(2,[S("","Cuesta de <b>Propios</b> (Santiago Rivas – Ramos)","hard")])
+          ])
+        ]},
+      12:{ title:"Circuito W",
+        raw:`CIRCUITO W . 1) BLOQUE 1: SUBIDA POR BUCEO OESTE FUERTE, BAJO RECUPERANDO, SIGO RAMBLA Y SUBO POR CUESTA LADO IZQ ESCALERA CENTRAL Y BAJO POR ESCALERA IDEM BUCEO ESTE + CUESTA LADO DER DE ESCALERA CENTRAL BAJO POR ESCALERA Y REPITO EL CIRCUITO 2 VECES - ENFASIS EN LA SUBIDA. AL TERMINAR (ARRIBA DE LA ESCALERA) MACROPAUSA POR CANTERO PROPIOS HASTA VERDI YY REGRESO, Y REPITO MISMO BLOQUE PERO C/ENFASIS EN LA BAJADA (BAJO BUCEO OESTE RAPIDO Y REGRESO SUAVE), BAJO POR ESCALERA Y SUBO POR LADO DERECHO, IDEM LADO BUCEO O,PERO SIGUIWNTE SUBO POR LADO IZ QUE LA ESCALERA. (COMPLETAR 2 O 3 W C/ ENFASIS EN BAJADA).`,
+        wo:[
+          B("Bloque 1",[
+            R(2,[
+              S("","Subida por <b>Buceo Oeste</b> fuerte","hard"),
+              S("","Bajo recuperando y sigo por la rambla","rec"),
+              S("","Subo por la cuesta del lado <b>izquierdo de la escalera central</b>","hard"),
+              S("","Bajo por la escalera","rec"),
+              S("","Subida por <b>Buceo Este</b> fuerte, bajo recuperando","hard"),
+              S("","Cuesta del lado <b>derecho de la escalera central</b>, bajo por la escalera","hard")
+            ])
+          ],"énfasis en la subida"),
+          S("","Macropausa (arriba de la escalera): cantero de Propios hasta Verdi y regreso","rec"),
+          B("Bloque 2",[
+            S("","Bajo <b>Buceo Oeste</b> rápido y regreso suave","hard"),
+            S("","Bajo por la escalera y subo por el lado derecho","mid"),
+            S("=","Ídem del lado Buceo Oeste, pero la siguiente subo por el lado izquierdo de la escalera","hard")
+          ],"énfasis en la bajada"),
+          N("Completar 2 o 3 W con énfasis en la bajada.")
+        ]},
+      14:{ title:"Circuitos en tenaza, progresivo",
+        raw:`3 CIRCUITOS EN TENAZA PROGRESIVO. 1) SUBIDA POR BUCEO OESTE FUERTE, BAJO RECUPERANDO. DOBLO POR RAMBLA Y CONTINUO HASTA CUESTA (IZQ) DE LA ESCALERA DEL MEDIO , BAJO POR ESCALERA Y REPITO 2) IGUAL PERO C/2 SUBIDAS 3) IGUAL PERO CON TRES SUBIDAS. TROTE SUAVE Y REPITO PARA EL LADO ESTE (EN ESE CASO SUBO POR CUESTA DEL LADO DERECHO DE LA ESCALERA`,
         wo:[
           B("Circuito 1",[
             R(1,[
@@ -448,14 +503,74 @@ const LIB = {
           S("5 min","Regresivo","reg"),
           NS("Sobre circuito con desnivel.")
         ]},
-      8:{ title:"Pirámide de ritmo",
-        raw:`PIRÁMIDE RITMO: 4 X (30 SEG R.FUERTE + 30 SEG R.SUAVE + 60 SEG R.FUERTE + 60 SEG R.SUAVE + 90 SEG R.FUERTE + 90 SEG R.SUAVE ) C/2 MIN TROTE SUAVE ENTRE CADA PIRÁMIDE.`,
+      9:{ title:"Bloque de ritmo 1-2-3, sobre plano",
+        raw:`TRABAJO DE RITMO. BLOQUE: REPITO 3: (1MIN FUERTE + 1 MIN SUAVE) + (2 MIN FUERTE + 1 MIN SUAVE) + (3 MIN FUERTE + 1 MIN SUAVE). ENTRE MEDIO DE C/BLOQUE, TOMAR 1 MIN EXTRA DE MACROPAUSA. * HACERLO SOBRE RECORRIDO PLANO`,
+        wo:[
+          R(3,[
+            S("1 min","Fuerte","hard"), S("1 min","Suave","easy"),
+            S("2 min","Fuerte","hard"), S("1 min","Suave","easy"),
+            S("3 min","Fuerte","hard"), S("1 min","Suave","easy")
+          ],"Entre bloque y bloque, 1 min extra de macropausa."),
+          NS("Sobre recorrido plano.")
+        ]},
+      13:{ title:"Seis bloques de ritmo, sobre circuito con desnivel leve",
+        raw:`BLOQUE 1: 6 X (30 SEG RITMO FUERTE + 30 SEG RITMO SUAVE) + BLOQUE 2: 2 X (2 MIN RITMO FUERTE + 1 MIN RITMO SUAVE) + BLOQUE 3:3 X (60 SEG RITMO FUERTE + 60 SEG RITMO SUAVE) + BLOQUE 4 = B2 + BLOQUE 5 = B1 + BLOQUE 6 = B2. PAUSA 1 MIN TROTE SUAVE ENTRE C/BLOQUE. * SOBRE CIRCUITO C/DESNIVEL LEVE`,
+        wo:[
+          B("Bloque 1",[R(6,[S("30 seg","Ritmo fuerte","hard"),S("30 seg","Ritmo suave","easy")])]),
+          B("Bloque 2",[R(2,[S("2 min","Ritmo fuerte","hard"),S("1 min","Ritmo suave","easy")])]),
+          B("Bloque 3",[R(3,[S("60 seg","Ritmo fuerte","hard"),S("60 seg","Ritmo suave","easy")])]),
+          B("Bloque 4",[S("=","Igual que el bloque 2","mid")]),
+          B("Bloque 5",[S("=","Igual que el bloque 1","mid")]),
+          B("Bloque 6",[S("=","Igual que el bloque 2","mid")]),
+          N("1 min de pausa en trote suave entre cada bloque."),
+          NS("Sobre circuito con desnivel leve.")
+        ]},
+      14:{ title:"Bloques 3+1 y 5+2, sobre plano",
+        raw:`TRABAJO DE RITMO. BLOQUE 1: (3 MIN FUERTE + 1 MIN R.SUAVE) + BLOQUE 2: (5 MIN R.FUERTE + 2 MIN R.SUAVE). SECUENCIA: B1 + B2 + B1 + B2 + B1 + B2 + B1 * HACERLO SOBRE RECORRIDO PLANO`,
+        wo:[
+          R(3,[
+            S("3 min","Fuerte · bloque 1","hard"), S("1 min","Suave","easy"),
+            S("5 min","Fuerte · bloque 2","hard"), S("2 min","Suave","easy")
+          ],"Secuencia: B1 + B2 + B1 + B2 + B1 + B2 + B1."),
+          B("Cierre · bloque 1",[S("3 min","Fuerte","hard"),S("1 min","Suave","easy")]),
+          NS("Sobre recorrido plano.")
+        ]},
+      15:{ title:"Bloques de ritmo, sobre circuito con desnivel leve",
+        raw:`BLOQUE 1: 6 X (30 SEG RITMO FUERTE + 30 SEG RITMO SUAVE) + BLOQUE 2: 2 X (2 MIN RITMO FUERTE + 1 MIN RITMO SUAVE) + BLOQUE 3: 3 X (60 SEG RITMO FUERTE + 60 SEG RITMO SUAVE) + BLOQUE 4 = B2 + BLOQUE 5 = B1 + BLOQUE 5 = B2 C/ 1 MIN CAMINANDO ENTRE C/BLOQUE. BLOQUE 1: 4 X (2 MIN FUERTE + 1 MIN SUAVE) + BLOQUE 2: 3 X (3 MIN FUERTE + 1 MIN SUAVE) + BLOQUE 1. ENTRE C/BLOQUE 1 MIN TROTE SUAVE. * SOBRE CIRCUITO C/DESNIVEL LEVE`,
+        wo:[
+          B("Bloque 1",[R(6,[S("30 seg","Ritmo fuerte","hard"),S("30 seg","Ritmo suave","easy")])]),
+          B("Bloque 2",[R(2,[S("2 min","Ritmo fuerte","hard"),S("1 min","Ritmo suave","easy")])]),
+          B("Bloque 3",[R(3,[S("60 seg","Ritmo fuerte","hard"),S("60 seg","Ritmo suave","easy")])]),
+          B("Bloque 4",[S("=","Igual que el bloque 2","mid")]),
+          B("Bloque 5",[S("=","Igual que el bloque 1","mid")]),
+          B("Bloque 5",[S("=","Igual que el bloque 2","mid")],"así figura en la planilla"),
+          N("1 min caminando entre cada bloque."),
+          N("A partir de acá la planilla vuelve a numerar desde el bloque 1:"),
+          B("Bloque 1",[R(4,[S("2 min","Fuerte","hard"),S("1 min","Suave","easy")])]),
+          B("Bloque 2",[R(3,[S("3 min","Fuerte","hard"),S("1 min","Suave","easy")])]),
+          B("Bloque 1",[S("=","Otra vez el bloque 1","mid")]),
+          N("1 min de trote suave entre cada bloque."),
+          NS("Sobre circuito con desnivel leve.")
+        ]},
+      16:{ title:"Bloque de ritmo en escalera, sobre plano",
+        raw:`BLOQUE RITMO: (2 MIN RITMO FUERTE + 1 MIN RITMO SUAVE + 3 MIN RITMO FUERTE + 1,5 MIN RITMO SUAVE + 4 MIN RITMO FUERTE + 2 MIN RITMO SUAVE) C/1 MIN DE MACROPAUSA CAMINANDO O TROTE SUAVE + REPITO 2 VECES MAS MISMO BLOQUE. * HACERLO SOBRE RECORRIDO PLANO`,
+        wo:[
+          R(3,[
+            S("2 min","Ritmo fuerte","hard"),   S("1 min","Ritmo suave","easy"),
+            S("3 min","Ritmo fuerte","hard"),   S("1,5 min","Ritmo suave","easy"),
+            S("4 min","Ritmo fuerte","hard"),   S("2 min","Ritmo suave","easy")
+          ],"1 min de macropausa caminando o trotando suave entre bloque y bloque."),
+          NS("Sobre recorrido plano.")
+        ]},
+      17:{ title:"Pirámide de ritmo",
+        raw:`PIRÁMIDE RITMO: 4 X (30 SEG R.FUERTE + 30 SEG R.SUAVE + 60 SEG R.FUERTE + 60 SEG R.SUAVE + 90 SEG R.FUERTE + 90 SEG R.SUAVE ) C/2 MIN TROTE SUAVE ENTRE CADA PIRÁMIDE. * SOBRE CIRCUITO C/DESNIVEL LEVE`,
         wo:[
           R(4,[
             S("30 seg","Ritmo fuerte","hard"), S("30 seg","Ritmo suave","easy"),
             S("60 seg","Ritmo fuerte","hard"), S("60 seg","Ritmo suave","easy"),
             S("90 seg","Ritmo fuerte","hard"), S("90 seg","Ritmo suave","easy")
-          ],"2 min de trote suave entre cada pirámide.")
+          ],"2 min de trote suave entre cada pirámide."),
+          NS("Sobre circuito con desnivel leve.")
         ]}
     }
   },
@@ -502,7 +617,7 @@ const LIB = {
             S("=","Repito por <b>Buceo Este</b>","hard")
           ],"énfasis en la bajada")
         ]},
-      6:{ title:"Circuito “0” con cambios de ritmo",
+      10:{ title:"Circuito “0” con cambios de ritmo",
         raw:`CIRCUITO "0" CON CAMBIO DE RITMOS POR TRAMO. DIVIDO EL 0 GRANDE EN 4 TRAMOS. (1ER TRAMO RAMBLA DESDE ESCALERA HASTA BUCEO ESTE - 2DO TRAMO BUCEO ESTE - 3ER TRAMO BUCEO OESTE - 4TO TRAMO RAMBLA DESDE BUCEO OESTE HASTA ESCALERA. ALTERNO 1 TRAMO FUERTE Y 1 TRAMO SUAVE. AL COMPLETAR PRIMER 0, REPITO INICIANDO EN SENTIDO CONTRARIO. AL FINALIZAR AMBOS "0" MACROPAUSA X ESCALERA Y REPITO MISMO TRABAJO INICIANDO BAJANDO X BUCEO ESTE Y AL FINALIZAR X BUCEO OESTE AL COMPLETAR, BAJO LA ESCALERA Y REPITO IDEM PRIMEROS DOS "8" PERO COMENZANDO 1ER TRAMO SUAVE, Y SIGUIENTE FUERTE. TOTAL 6 "0".`,
         wo:[
           B("El “0” grande, en 4 tramos",[
@@ -525,7 +640,7 @@ const LIB = {
           ]),
           N("Total: 6 “0”.")
         ]},
-      8:{ title:"Circuito “boomerang”",
+      11:{ title:"Circuito “boomerang”",
         raw:`CIRCUITO "BOOMERANG". BLOQUE 1. BUCEO OESTE. DIVIDO LA CUESTA EN 2, HAGO ESA CUESTA 3 VECES, REALIZO 2DA MITAD (1/2 HASTA ARRIBA) A RITMO TANTO SUBIDA COMO BAJADA RECUPERO EN LA 1RA MITAD (MITAD - ABAJO). AL TERMINAR MACROPAUSA POR RAMBLA HASTA BUCEO ESTE. BLOQUE 2 IDEM ANTERIOR PERO EN BUCEO E. PAUSA, TROTO POR RAMBLA Y SUBO POR ESCALERA + BLOQUE 3) REPITO 3 CUESTAS BUCEO O CON RITMO EN 1RA MITAD (BAJADA - SUBIDA) RECUPERANDO EN LA 2DA MITAD. + PAUSA BAJADA CUESTA O, RAMBLA Y ESCALERA + BLOQUE 4) IDEM 3 PERO SOBRE BUCEO E`,
         wo:[
           N("La cuesta se divide en 2 mitades."),
@@ -544,6 +659,48 @@ const LIB = {
             S("","Pausa: bajada cuesta Oeste, rambla y escalera","rec")
           ]),
           B("Bloque 4 · Buceo Este",[S("=","Ídem el bloque 3","hard")])
+        ]},
+      12:{ title:"Circuito escalera — Propios",
+        raw:`CIRCUITO ESCALERA PROPIOS.BLOQUE 1: (ESCALERA 5 ESCALONES). ARRANCO EN PROPIOS Y PRESIDENTE ORIBE, AVANZO DOS CUADRAS, Y REGRESO UNA HASTA LLEGAR A AV.ITALIA. LA SUBIDA LO HAGO A RITMO CONTROLADO Y LA BAJADA LO HAGO A RITMO FUERTE. AL LLEGAR A AV.ITALIA, TRANSFERENCIA TROTE A RITMO AGIL , HASTA PRESIDENTE ORIBE Y DE ALLI HASTA RAMON ANDADOR IDA Y VUELTA TROTE SUAVE. Y REPITO HASTA COMPLETAR TRES ESCALERAS EN TOTAL .`,
+        wo:[
+          N("Una escalera de 5 escalones: arranco en <b>Propios y Presidente Oribe</b>, avanzo dos cuadras y regreso una, hasta llegar a <b>Av. Italia</b>."),
+          R(3,[
+            B("Una escalera",[
+              S("","Cada subida a ritmo controlado","mid"),
+              S("","Cada bajada a ritmo fuerte","hard")
+            ]),
+            S("","Transferencia: trote ágil desde Av. Italia hasta Presidente Oribe","mid"),
+            S("","De ahí hasta Ramón Anador, ida y vuelta, trote suave","easy")
+          ],"Tres escaleras en total.")
+        ]},
+      15:{ title:"Cuesta dividida en tercios",
+        raw:`EN CUESTA BUCEO OESTE, LA DIVIDO EN 3 TRAMOS. Y SIEMPRE BAJO HASTA EL INICIO: BLOQUE 1: ENFASIS EN SUBIDA. SUBO 1/3 + SUBO 2/3 + SUBO 3/3 + 2/3 + 1/3 + MACROPÀUSA X RAMBLA Y REPITO IDEM X BUCEO ESTE. AL FINALIZAR, MACROPAUSA POR RAMBLA, SUBO SUAVE POR LA ESCALERA . BLOQUE 2: IDEM BLOQUE ANTERIOR HACIENDO ÉNFASIS EN LA BAJADA Y LA SUBIDA RECUP.. AL FINALIZAR EL TRABAJO SOBRE BUCEO OESTE, MACROPAUSA CANTERO PROPÌOS HASTA VERDI, REGRESO Y REPITO X BUCEO E.`,
+        wo:[
+          N("Sobre la cuesta de <b>Buceo Oeste</b>, dividida en 3 tramos. Siempre bajo hasta el inicio."),
+          B("Bloque 1",[
+            S("1/3","Subo el primer tercio","hard"),
+            S("2/3","Subo dos tercios","hard"),
+            S("3/3","Subo la cuesta entera","hard"),
+            S("2/3","Subo dos tercios","hard"),
+            S("1/3","Subo el primer tercio","hard"),
+            S("","Macropausa por la rambla","rec"),
+            S("=","Repito lo mismo por <b>Buceo Este</b>","hard"),
+            S("","Macropausa por la rambla y subo suave la escalera","rec")
+          ],"énfasis en la subida"),
+          B("Bloque 2",[
+            S("=","Ídem el bloque anterior, pero con el énfasis en la <b>bajada</b>; la subida es recuperación","hard"),
+            S("","Macropausa: cantero de Propios hasta Verdi, regreso","rec"),
+            S("=","Repito por <b>Buceo Este</b>","hard")
+          ],"énfasis en la bajada")
+        ]},
+      16:{ title:"8 pasadas en subida — circuito de 1 km",
+        raw:`8 PASADAS DE 400 MTS APROX EN SUBIDA EN UN CIRCUITO DE 1 KM (PLANO Y BAJADA TROTE RECUPERANDO). COMIENZO DESDE MOJON MUSEO OCEANOGRÁFICO, HACIA MOJON QUE QUEDA PASANDO 26 DE MARZO (1KM) AL SENTIR QUE ARRANCA LA SUBIDA, EMPIEZO A ACELERAR (FUERTE9 HASTA. LLEGAR AL PUNTO MAS ALTO (PROBABLEMENTE MOJON LICEO FRANCES) DESDE AHI , RECUPERO CON TROTE HASTA LLEGAR AL MOJÓN DE 26 DE MARZO, DONDE REGRESO Y EMPIEZO LA NUEVA PASADA A RITMO UNA VEZ QUE EMPIEZE A ELEVARSE EL TERRENO (EN DEFINITIVA, LO QUE NO ES SUBIDA, LO HAGO A UN RITMO DE TROTE REGULADO)`,
+        wo:[
+          N("Circuito de 1 km por la rambla: del mojón del <b>Museo Oceanográfico</b> al mojón que queda pasando <b>26 de Marzo</b>."),
+          R(8,[
+            S("~400 mts","Fuerte: acelero cuando arranca la subida, hasta el punto más alto (probablemente el mojón del <b>Liceo Francés</b>)","hard"),
+            S("","Trote recuperando hasta el mojón de 26 de Marzo y doy la vuelta","rec")
+          ],"Lo que no es subida, a trote regulado.")
         ]}
     }
   },
@@ -557,17 +714,24 @@ const LIB = {
             R(2,[S("1000 mts","Pasada","hard"),S("60 seg","Recuperación","rec")])
           ],"Cada grupo más rápido que el anterior. 6 pasadas en total."),
         ]},
-      6:{ title:"3 × 1500 progresivos",
-        raw:`3 X 1500 MTS PROGRESIVO CADA 500 MTS C/90 SEG DE RECUPERACIÓN ENTRE C/PASADA`,
+      9:{ title:"Pasadas 400 · 600 · 800",
+        raw:`4 X 400 MTS C/200 MTS DE RECUP. + 3 X 600 MTS C/400 MTS DE RECUP. + 1 X 800 MTS C/600 MTS DE RECUP.`,
         wo:[
-          R(3,[S("1500 mts","Progresivo cada 500 mts","prog"),S("90 seg","Recuperación","rec")])
+          R(4,[S("400 mts","Pasada","hard"),S("200 mts","Recuperación","rec")]),
+          R(3,[S("600 mts","Pasada","hard"),S("400 mts","Recuperación","rec")]),
+          S("800 mts","Pasada","hard"), S("600 mts","Recuperación","rec")
         ]},
-      7:{ title:"Pasadas en escalera: 1000 · 2000 · 3000",
-        raw:`1 X 1000 MTS C/60 SEG DE RECUP + 1 X 2000 MTS C/120 SEG DE RECUP. + 1 X 3000 MTS.`,
+      13:{ title:"600 · 1200 · 1600 progresivos",
+        raw:`3 X 600 MTS C/400 MTS DE RECUP. ( 1 S + 1 M + 1F) + 2 X 1200 MTS (PROGRESIVA C/600 MTS) C/800 MTS DE RECUP + 1 X 1600 MTS (PROGRESIVA C/600 MTS) C/1200 MTS DE VUELTA A LA CALMA (RECUP)`,
         wo:[
-          S("1000 mts","Pasada","hard"), S("60 seg","Recuperación","rec"),
-          S("2000 mts","Pasada","hard"), S("120 seg","Recuperación","rec"),
-          S("3000 mts","Pasada","hard")
+          B("3 × 600",[
+            S("600 mts","Suave","easy"),  S("400 mts","Recuperación","rec"),
+            S("600 mts","Medio","mid"),   S("400 mts","Recuperación","rec"),
+            S("600 mts","Fuerte","hard"), S("400 mts","Recuperación","rec")
+          ],"1 suave, 1 medio, 1 fuerte"),
+          R(2,[S("1200 mts","Progresiva cada 600 mts","prog"),S("800 mts","Recuperación","rec")]),
+          S("1600 mts","Progresiva cada 600 mts","prog"),
+          S("1200 mts","Vuelta a la calma (recuperación)","rec")
         ]}
     }
   }
@@ -590,7 +754,16 @@ const CONT = {
     B("PC",[R(2,[S("15 min","Ritmo superaeróbico","hard"),S("10 min","Ritmo subaeróbico de pausa","easy")])]),
     P("VC","<b>10 min</b> de trote suave")
   ]},
-  "6-3":{ title:"Tres bloques de 10 min", wo:[
+  "10-3":{ title:"Dos bloques de 15 min", wo:[
+    P("EC","<b>10 min</b> de trote subaeróbico"),
+    B("PC · 2 bloques de 15 min",[R(2,[
+      S("5 min","Cambios de pendiente, de superficie, etc.: cuestas, escaleras","mid"),
+      S("5 min","Cambios de ritmo en plano","hard"),
+      S("5 min","Trote suave","easy")
+    ])]),
+    P("VC","<b>10 min</b> de trote suave")
+  ]},
+  "11-3":{ title:"Tres bloques de 10 min", wo:[
     P("EC","<b>10 min</b> de trote subaeróbico"),
     B("PC · 3 bloques de 10 min",[
       S("10 min","Bloque 1: cambios de pendiente, de superficie, etc.","mid"),
@@ -599,20 +772,34 @@ const CONT = {
     ]),
     P("VC","<b>10 min</b> de trote suave")
   ]},
-  "7-3":{ title:"30 min continuos superaeróbicos", wo:[
-    P("EC","<b>10 min</b> de trote suave"),
-    B("PC",[S("30 min","Ritmo superaeróbico continuo","hard")]),
-    P("VC","<b>10 min</b> de trote suave")
+  "12-3":{ title:"Tres bloques de 15 min", wo:[
+    P("EC","<b>5 min</b> de trote subaeróbico"),
+    B("PC · 3 bloques de 15 min",[
+      S("15 min","Bloque 1: cambios de pendiente, de superficie, etc.","mid"),
+      S("15 min","Bloque 2: cambios de ritmo en plano","hard"),
+      S("15 min","Bloque 3: cambios de ritmo con pendientes, más moderadas que las primeras","mid")
+    ]),
+    P("VC","<b>5 min</b> de trote suave")
   ]},
-  "8-3":{ title:"Fartlek de 60 min", wo:[
+  "14-3":{ title:"Fartlek de 70 min", wo:[
+    P("EC","<b>5 min</b> suave"),
+    B("PC",[S("60 min","Fartlek: cambios de ritmo libres","mid")]),
+    P("VC","<b>5 min</b> suave")
+  ]},
+  "15-3":{ title:"Fartlek de 60 min", wo:[
     P("EC","<b>5 min</b> suave"),
     B("PC",[S("50 min","Fartlek: cambios de ritmo libres","mid")]),
+    P("VC","<b>5 min</b> suave")
+  ]},
+  "16-3":{ title:"Fartlek de 50 min", wo:[
+    P("EC","<b>5 min</b> suave"),
+    B("PC",[S("40 min","Fartlek: cambios de ritmo libres","mid")]),
     P("VC","<b>5 min</b> suave")
   ]}
 };
 
 const WEEKS = [
-  { n:1, from:"2026-08-31", to:"2026-09-06",
+  { n:1, from:"2026-08-31", to:"2026-09-06", phase:"Primeros mesociclos",
     s:[{k:"Sesión 1",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",1]},
        {k:"Sesión 2",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",1]},
        {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUAVE + PC: 4 X (5 MIN A RITMO SUPERAEROBICO + 5 MIN RITMO SUBAERÓBICO) + VC: 10 MIN TROTE SUAVE`,cont:"1-3"}],
@@ -644,25 +831,62 @@ const WEEKS = [
     fds:[{d:"Carrera",t:`DESAFÍO LOS CARANCHOS 16 O 25 KM (PREFERENTEMENTE)`}],
     vol:[{lab:"16 o 25",km:16,series:"d1",src:"16 O 25 KM · Desafío Los Caranchos"},
          {lab:"",km:9,series:"opt",src:"Los 9 KM extra si elegís la distancia de 25"}] },
-  { n:6, from:"2026-10-05", to:"2026-10-11",
-    s:[{k:"Sesión 1",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",6]},
-       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",6]},
-       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUB + PC: 3 BLOQUES 10 MIN DIVIDIDOS EN: BLOQUE 1: CAMBIO DE PENDIENTES, SUPERFICIE, ETC + BLOQUE 2: 10 MIN CAMBIOS DE RITMO EN PLANO + 10 MIN RITMO C/PENDIENTES (MAS MODERADAS QUE LAS PRIMERAS) + VC: 10 MINUTOS TROTE SUAVE`,cont:"6-3"}],
-    fds:[{d:"Día 1",t:`FONDO 18 KM PREFERENTEMENTE SOBRE CIRCUITO PLANO (SUPERFICIE BLANDA)`},
-         {d:"Día 2",t:`FONDO 20 KM PREFERENTEMENTE SOBRE QUE ALTERNE DESNIVEL, TERRENO VARIADO, ETC`}],
-    vol:[{lab:"18",km:18,series:"d1",src:"18 KM"},{lab:"20",km:20,series:"d2",src:"20 KM"}] },
-  { n:7, from:"2026-10-12", to:"2026-10-18",
-    s:[{k:"Sesión 1",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",7]},
-       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",7]},
-       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUAVE + PC: 30 MIN A RITMO SUPERAEROBICO + VC: 10 MIN TROTE SUAVE`,cont:"7-3"}],
-    fds:[{d:"Día 1",t:`FONDO 26 - 28 KM PREFERENTEMENTE TÉCNICO (QUE ALTERNE DESNIVEL, TERRENO VARIADO, ETC)`}],
+  { n:9, from:"2026-10-05", to:"2026-10-11", phase:"Último mesociclo y tapering",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",9]},
+       {k:"Sesión 2",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",9]},
+       {k:"Sesión 3",tag:"Opcional",t:`OPCIONAL: TROTE SUBAERÓBICO 40 - 45 MIN`}],
+    fds:[{d:"Día 1",t:`FONDO TECNICO 16 - 18 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`}],
+    vol:[{lab:"16–18",km:17,series:"d1",src:"16 - 18 KM"}] },
+  { n:10, from:"2026-10-12", to:"2026-10-18",
+    s:[{k:"Sesión 1",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",10]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",10]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUB + PC: 2 BLOQUES 15 MIN DIVIDIDOS EN : 5 MIN CAMBIO DE PENDIENTE, SUPERFICIE, ETC - 5 MIN CAMBIOS DE RITMO EN PLANO - 5 MIN TROTE SUAVE. DURANTE LOS PRIMEROS 5 MIN HACER CUESTAS - ESCALERAS, ETC + VC: 10 MINUTOS TROTE SUAVE`,cont:"10-3"}],
+    fds:[{d:"Día 1",t:`FONDO PLANO 18 KM (SUPERFICIE BLANDA)`},
+         {d:"Día 2",t:`FONDO TECNICO 22 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`}],
+    vol:[{lab:"18",km:18,series:"d1",src:"18 KM"},{lab:"22",km:22,series:"d2",src:"22 KM"}] },
+  { n:11, from:"2026-10-19", to:"2026-10-25",
+    s:[{k:"Sesión 1",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",11]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",11]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 10 MIN TROTE SUB + PC: 3 BLOQUES 10 MIN DIVIDIDOS EN: BLOQUE 1: CAMBIO DE PENDIENTES, SUPERFICIE, ETC + BLOQUE 2: 10 MIN CAMBIOS DE RITMO EN PLANO + 10 MIN RITMO C/PENDIENTES (MAS MODERADAS QUE LAS PRIMERAS) + VC: 10 MINUTOS TROTE SUAVE`,cont:"11-3"}],
+    fds:[{d:"Día 1",t:`FONDO TECNICO 26 - 28 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`}],
     vol:[{lab:"26–28",km:27,series:"d1",src:"26 - 28 KM"}] },
-  { n:8, from:"2026-10-19", to:"2026-10-25",
-    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",8]},
-       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",8]},
-       {k:"Sesión 3",tag:"Fartlek",t:`FARTLEK 60 MINUTOS. (EC & VC: 5 MIN SUAVE + 50 MIN FARTLEK)`,cont:"8-3"}],
-    fds:[{d:"Día 1",t:`FONDO 18 KM SOBRE TERRENO PLANO (SUPERFICIE BLANDA, PLAYA, PASTO)`}],
-    vol:[{lab:"18",km:18,series:"d1",src:"18 KM"}] }
+  { n:12, from:"2026-10-26", to:"2026-11-01",
+    s:[{k:"Sesión 1",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",12]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",12]},
+       {k:"Sesión 3",tag:"Continuo",t:`EC: 5 MIN TROTE SUB + PC: 3 BLOQUES 15 MIN DIVIDIDOS EN: BLOQUE 1: CAMBIO DE PENDIENTES, SUPERFICIE, ETC + BLOQUE 2: CAMBIOS DE RITMO EN PLANO + BLOQUE 3: CAMBIO RITMO C/PENDIENTES (MAS MODERADAS QUE LAS PRIMERAS) + VC: 5 MINUTOS TROTE SUAVE`,cont:"12-3"}],
+    fds:[{d:"Día 1",t:`FONDO TECNICO 20 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`},
+         {d:"Día 2",t:`FONDO TECNICO 24 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`}],
+    vol:[{lab:"20",km:20,series:"d1",src:"20 KM"},{lab:"24",km:24,series:"d2",src:"24 KM"}] },
+  { n:13, from:"2026-11-02", to:"2026-11-08",
+    s:[{k:"Sesión 1",tag:"Pasadas",t:`CLASE / FORMACION CORPORAL + TRABAJO PASADAS`,ref:["pasadas",13]},
+       {k:"Sesión 2",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",13]},
+       {k:"Sesión 3",tag:"Opcional",t:`OPCIONAL: TROTE SUBAERÓBICO 45 - 60 MIN`}],
+    fds:[{d:"Día 1",t:`FONDO PLANO 18 - 20 KM (SUPERFICIE BLANDA)`}],
+    vol:[{lab:"18–20",km:19,series:"d1",src:"18 - 20 KM"}] },
+  { n:14, from:"2026-11-09", to:"2026-11-15",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",14]},
+       {k:"Sesión 2",tag:"Cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO CUESTAS`,ref:["cuestas",14]},
+       {k:"Sesión 3",tag:"Fartlek",t:`FARTLEK 70 MINUTOS. (EC & VC: 5 MIN SUAVE + 60 MIN FARTLEK)`,cont:"14-3"}],
+    fds:[{d:"Día 1",t:`FONDO PLANO 18 KM (SUPERFICIE BLANDA)`},
+         {d:"Día 2",t:`FONDO TECNICO 22 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`}],
+    vol:[{lab:"18",km:18,series:"d1",src:"18 KM"},{lab:"22",km:22,series:"d2",src:"22 KM"}] },
+  { n:15, from:"2026-11-16", to:"2026-11-22",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",15]},
+       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",15]},
+       {k:"Sesión 3",tag:"Fartlek",t:`FARTLEK 60 MINUTOS. (EC & VC: 5 MIN SUAVE + 50 MIN FARTLEK)`,cont:"15-3"}],
+    fds:[{d:"Día 1",t:`FONDO TECNICO 22 - 24 KM (ALTERNANDO DESNIVEL, TERRENO VARIADO, ETC)`}],
+    vol:[{lab:"22–24",km:23,series:"d1",src:"22 - 24 KM"}] },
+  { n:16, from:"2026-11-23", to:"2026-11-29",
+    s:[{k:"Sesión 1",tag:"Ritmo",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO`,ref:["ritmos",16]},
+       {k:"Sesión 2",tag:"Ritmo + cuestas",t:`CLASE / FORMACION CORPORAL + TRABAJO RITMO C/CUESTAS`,ref:["ritmoCuestas",16]},
+       {k:"Sesión 3",tag:"Fartlek",t:`FARTLEK 50 MINUTOS. (EC & VC: 5 MIN SUAVE + 40 MIN FARTLEK)`,cont:"16-3"}],
+    fds:[{d:"Día 1",t:`FONDO TECNICO 16 - 18 KM (SOBRE SUPERFICIE PLANA Y BLANDA)`}],
+    vol:[{lab:"16–18",km:17,series:"d1",src:"16 - 18 KM"}] },
+  { n:17, from:"2026-11-30", to:"2026-12-06", race:true, volLab:"Carrera",
+    s:[{k:"Lun a dom",tag:"A definir",t:`A DEFINIR`},
+       {k:"Ritmo",tag:"Pirámide",t:`TRABAJO RITMO: FIGURA EN LA PLANILLA PARA ESTA SEMANA`,ref:["ritmos",17]}],
+    fds:[{d:"Carrera",t:`CRUCE DE LOS ANDES`}],
+    vol:[] }
 ];
 
 /* ============================================================== utilities */
@@ -733,11 +957,11 @@ const totalKm=WEEKS.reduce((a,w)=>a+w.vol.filter(v=>v.series!=="opt").reduce((b,
 document.getElementById("km-total").innerHTML=`<b>~${totalKm}</b> km de fondos`;
 
 (function chart(){
-  const MAX=40, ticks=[0,10,20,30,40];
+  const MAX=50, ticks=[0,10,20,30,40,50];
   const rows=WEEKS.map(w=>{
     const total=w.vol.filter(v=>v.series!=="opt").reduce((a,v)=>a+v.km,0);
     const solid=w.vol.filter(v=>v.lab&&v.series!=="opt");
-    const label=solid.map(v=>v.lab).join(" + ")+(solid.length>1?` = ${total}`:"");
+    const label=solid.length?solid.map(v=>v.lab).join(" + ")+(solid.length>1?` = ${total}`:""):(w.volLab||"");
     const segs=w.vol.map(v=>`<div class="seg-bar ${v.series}" style="width:${(v.km/MAX*100).toFixed(2)}%" data-tip="${esc(v.src)}" data-w="Semana ${w.n}"></div>`).join("");
     return `<div class="row" data-wk="${w.n}"${w===nowWeek?' data-now="1"':''}><div class="k">S${w.n}</div>`+
            `<div class="track">${segs}</div><div class="val">${label}</div></div>`;
@@ -755,7 +979,7 @@ document.getElementById("km-total").innerHTML=`<b>~${totalKm}</b> km de fondos`;
     <div class="axis"><div></div><div class="ticks">
       ${ticks.map(t=>`<span style="left:${t/MAX*100}%">${t}</span>`).join("")}
     </div><div class="unit">KM</div></div>
-    <p class="foot">Las semanas con rango (22–24 km) se grafican en su punto medio. La semana 5 es el Desafío Los Caranchos: 16 km firmes, los 9 restantes si vas por los 25.</p>`;
+    <p class="foot">Las semanas con rango (22–24 km) se grafican en su punto medio. La semana 5 es el Desafío Los Caranchos: 16 km firmes, los 9 restantes si vas por los 25. Las semanas 6 a 8 del primer plan quedaron reemplazadas por el plan nuevo, que arranca en la 9. La 17 es el Cruce.</p>`;
 
   const tip=document.getElementById("tip"), ch=document.getElementById("chart");
   ch.addEventListener("pointerover",e=>{const s=e.target.closest(".seg-bar");if(!s)return;
@@ -783,7 +1007,7 @@ document.getElementById("weeks").innerHTML=WEEKS.map(w=>{
     <div class="body-col">${w.fds.map(f=>
       `<div class="subline"><span class="d">${f.d}</span><div class="title">${markup(legible(f.t))}</div></div>`).join("")}</div>
   </li>`;
-  return `<article class="wk" id="s${w.n}"${w===nowWeek?' data-now="1"':''}>
+  return (w.phase?`<div class="phase">${w.phase}</div>`:"")+`<article class="wk" id="s${w.n}"${w===nowWeek?' data-now="1"':''}>
     <div class="wk-head"><span class="wk-n">Semana ${w.n}</span>
       <span class="wk-d">${fmtRange(w.from,w.to)}</span>
       ${w===nowWeek?'<span class="now-tag">Esta semana</span>':''}</div>

@@ -1,8 +1,12 @@
 # Plan Cruce de los Andes 2026
 
-Plan de entrenamiento (primeros mesociclos) en formato web, instalable en el celular.
-Transcripción del Excel entregado por el profe, con cada trabajo desglosado en su
-esquema de bloques y repeticiones.
+Plan de entrenamiento en formato web, instalable en el celular. Transcripción de los
+Excel entregados por el profe, con cada trabajo desglosado en su esquema de bloques y
+repeticiones:
+
+- **Primeros mesociclos** — semanas 1 a 5 (31 ago → 4 oct). Las semanas 6 a 8 de ese
+  plan quedaron reemplazadas por el plan nuevo.
+- **Último mesociclo y tapering** — semanas 9 a 17 (5 oct → 6 dic), la 17 es el Cruce.
 
 **Sitio:** https://nicolasferencz.github.io/plan-cruce-andes-2026/
 

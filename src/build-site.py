@@ -49,7 +49,7 @@ SITE.mkdir(parents=True, exist_ok=True)
 (SITE / "manifest.webmanifest").write_text('''{
   "name": "Plan Cruce de los Andes 2026",
   "short_name": "Plan Cruce",
-  "description": "Plan de entrenamiento — primeros mesociclos.",
+  "description": "Plan de entrenamiento — Cruce de los Andes 2026.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
