@@ -52,10 +52,11 @@
     color:var(--ink-3);text-transform:uppercase}
   .meta b{color:var(--ink-2);font-weight:500}
   .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-  button.ctl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+  .ctl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
     text-transform:uppercase;background:var(--surface);color:var(--ink-2);
     border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;cursor:pointer}
-  button.ctl:hover{border-color:var(--accent);color:var(--ink)}
+  a.ctl{text-decoration:none;display:inline-block}
+  .ctl:hover{border-color:var(--accent);color:var(--ink)}
   button.ctl[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 
   /* ---------- sticky week nav ---------- */
@@ -136,6 +137,14 @@
   .k-col{display:flex;flex-direction:column;gap:3px}
   .k-name{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.07em;
     text-transform:uppercase;color:var(--ink-2);font-weight:500}
+  a.fit{align-self:flex-start;margin-top:4px;font-family:"IBM Plex Mono",monospace;font-size:10px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none;font-weight:600;
+    border:1px solid var(--line-2);border-radius:999px;padding:2px 8px;background:var(--surface);white-space:nowrap}
+  a.fit:hover{border-color:var(--accent)}
+  .steps{margin:0;padding-left:20px;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px 14px 34px;font-size:13.5px;color:var(--ink-2);line-height:1.55}
+  .steps li{margin-block:4px}
+  .steps code{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--surface-2);padding:0 4px;border-radius:3px}
   .tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;
     text-transform:uppercase;color:var(--ink-3)}
   .body-col{min-width:0}
@@ -276,6 +285,8 @@
     </div>
     <div class="controls">
       <button class="ctl" id="btn-open" aria-pressed="false">Abrir todos los trabajos</button>
+      <a class="ctl" href="fit/plan-cruce-garmin.zip" download>↓ Todos para Garmin (.zip)</a>
+      <a class="ctl" href="#garmin">Cómo pasarlos al reloj</a>
     </div>
   </header>
 
@@ -311,6 +322,20 @@
       <span class="note">Los mismos esquemas, agrupados por tipo</span>
     </div>
     <div id="libs"></div>
+  </section>
+
+  <section id="garmin">
+    <div class="sechead">
+      <h2>Pasarlo al Garmin</h2>
+      <span class="note">Cada trabajo se baja como entrenamiento estructurado (.FIT)</span>
+    </div>
+    <ol class="steps">
+      <li>Desde la compu, tocá <b>↓ Garmin</b> en la sesión que quieras, o bajá el <b>.zip</b> con todos y descomprimilo.</li>
+      <li>Conectá el reloj por USB. Si la Mac no lo muestra como disco, abrilo con <b>OpenMTP</b> (gratis).</li>
+      <li>Copiá los <code>.fit</code> a la carpeta <code>GARMIN/NewFiles</code> del reloj y desconectalo.</li>
+      <li>En el reloj: <b>Entrenamiento → Entrenamientos</b>. Cada uno se llama <code>S9 · Ritmo</code>, <code>S10 · Cuestas</code>, etc.</li>
+    </ol>
+    <p class="foot" style="margin-top:10px;font-size:12px;color:var(--ink-3)">Los pasos con tiempo o distancia avanzan solos. Los de recorrido (tramos, cuestas, parabrisas) quedan como “hasta tocar LAP”: los pasás vos con el botón de vuelta. Desde el iPhone se baja el archivo pero no se puede pasar al reloj.</p>
   </section>
 
   <section id="glosario">
@@ -892,6 +917,7 @@ const WEEKS = [
 /* ============================================================== utilities */
 const MONTHS=["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic"];
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const fitFile=(n,i)=>`fit/semana-${String(n).padStart(2,"0")}-sesion-${i+1}.fit`;
 const fmtRange=(a,b)=>{const d1=new Date(a+"T12:00:00"),d2=new Date(b+"T12:00:00");
   return `${d1.getDate()} ${MONTHS[d1.getMonth()]} – ${d2.getDate()} ${MONTHS[d2.getMonth()]}`;};
 
@@ -991,14 +1017,14 @@ document.getElementById("km-total").innerHTML=`<b>~${totalKm}</b> km de fondos`;
 })();
 
 document.getElementById("weeks").innerHTML=WEEKS.map(w=>{
-  const sessions=w.s.map(s=>{
+  const sessions=w.s.map((s,i)=>{
     let work=null;
     if(s.ref){ const[l,n]=s.ref; work=LIB[l].items[n]; }
     else if(s.cont){ work=CONT[s.cont]; }
     const det=work?`<details class="work"${w===nowWeek?" open":""}>
         <summary><span class="ar">›</span> Ver el trabajo</summary>${diagram(work)}</details>`:"";
     return `<li>
-      <div class="k-col"><span class="k-name">${s.k}</span><span class="tag">${s.tag}</span></div>
+      <div class="k-col"><span class="k-name">${s.k}</span><span class="tag">${s.tag}</span>${work?`<a class="fit" href="${fitFile(w.n,i)}" download title="Entrenamiento estructurado para el reloj">↓ Garmin</a>`:""}</div>
       <div class="body-col"><div class="title">${markup(legible(s.t))}</div>${det}</div>
     </li>`;
   }).join("");

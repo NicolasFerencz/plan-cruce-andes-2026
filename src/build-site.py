@@ -100,6 +100,9 @@ self.addEventListener("fetch", function(e){
 
 (SITE / ".nojekyll").write_text("", encoding="utf-8")
 
+shutil.rmtree(SITE / "fit", ignore_errors=True)
+shutil.copytree(SCRATCH / "fit", SITE / "fit")
+
 print("sitio en", SITE)
 for f in sorted(SITE.iterdir()):
     if f.is_file():

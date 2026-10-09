@@ -22,6 +22,7 @@ Queda con ícono propio, a pantalla completa y funciona sin señal.
 | `index.html` | La página entera, pre-renderizada (se lee incluso con JavaScript apagado) |
 | `sw.js` | Service worker: cache-first, habilita el uso offline |
 | `manifest.webmanifest` | Metadatos de la app instalable |
+| `fit/` | Un `.fit` por trabajo (entrenamiento estructurado para Garmin) y un `.zip` con todos |
 | `icon-*.png`, `apple-touch-icon.png` | Íconos |
 
 ## Notas
@@ -44,6 +45,9 @@ node build.mjs                 # ejecuta el render y hornea el HTML estático
 python3 build-site.py 2        # lo envuelve como sitio; el número es la versión del cache
 python3 make-icons.py          # sólo si cambian los íconos
 ```
+
+`build.mjs` también genera los `.fit` con `fit.mjs`, que traduce cada esquema de bloques
+a pasos de Garmin (tiempo, distancia o "hasta LAP", con repeticiones).
 
 `build.mjs` corre el código de render de `src-page.html` contra un DOM simulado y
 escribe el markup ya resuelto: por eso la página se lee aunque el navegador no

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { encodeWorkout, zip } from "./fit.mjs";
 
 const DIR = new URL(".", import.meta.url).pathname;
 const src = fs.readFileSync(DIR + "src-page.html", "utf8");
@@ -18,7 +19,8 @@ const mk = (id) => (nodes[id] ??= {
   style:{}, dataset:{}, textContent:"",
 });
 const documentStub = { getElementById: mk, querySelectorAll: () => [] };
-new Function("document", "window", "innerWidth", code)(documentStub, {}, 1024);
+const { WEEKS, LIB, CONT } =
+  new Function("document", "window", "innerWidth", code + "\nreturn {WEEKS, LIB, CONT};")(documentStub, {}, 1024);
 
 for (const key of ["nav","chart","weeks","libs","km-total"]) {
   if (!store[key]) throw new Error("no se generó: " + key);
@@ -107,6 +109,22 @@ const runtime = `
   }
 })();
 </script>`;
+
+/* ---- un .FIT por trabajo, más un zip con todos ---- */
+fs.rmSync(DIR + "fit", { recursive:true, force:true });
+fs.mkdirSync(DIR + "fit");
+const all = [];
+for (const w of WEEKS) w.s.forEach((s, i) => {
+  const work = s.ref ? LIB[s.ref[0]].items[s.ref[1]] : s.cont ? CONT[s.cont] : null;
+  if (!work) return;
+  const file = `semana-${String(w.n).padStart(2,"0")}-sesion-${i+1}.fit`;
+  const { bytes, steps } = encodeWorkout(`S${w.n} · ${s.tag}`, work.wo);
+  if (steps > 50) console.warn(`ojo: ${file} tiene ${steps} pasos (algunos relojes cortan en 50)`);
+  fs.writeFileSync(DIR + "fit/" + file, bytes);
+  all.push({ name: file, bytes });
+});
+fs.writeFileSync(DIR + "fit/plan-cruce-garmin.zip", zip(all));
+console.log("fit —", all.length, "entrenamientos");
 
 fs.writeFileSync(DIR + "plan-cruce.html", out + "\n" + runtime + "\n");
 console.log("ok —", (out.length/1024|0) + "KB de HTML estático");
