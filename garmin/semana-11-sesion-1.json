@@ -1,0 +1,260 @@
+{
+ "workoutName": "S11 · Ritmo + cuestas",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 0,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "RepeatGroupDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 6,
+      "stepTypeKey": "repeat",
+      "displayOrder": 6
+     },
+     "numberOfIterations": 3,
+     "smartRepeat": false,
+     "endCondition": {
+      "conditionTypeId": 7,
+      "conditionTypeKey": "iterations",
+      "displayOrder": 7,
+      "displayable": false
+     },
+     "endConditionValue": 3,
+     "workoutSteps": [
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 2,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Cuesta entera: ritmo en la 2da mitad (de la mitad para arriba), subiendo y bajando"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 3,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Recupero en la 1ra mitad (de la mitad para abajo)"
+      }
+     ]
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 4,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Macropausa por la rambla hasta Buceo Este"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 5,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Ídem el bloque anterior"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 6,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Pausa: troto por la rambla y subo por la escalera"
+    },
+    {
+     "type": "RepeatGroupDTO",
+     "stepOrder": 7,
+     "stepType": {
+      "stepTypeId": 6,
+      "stepTypeKey": "repeat",
+      "displayOrder": 6
+     },
+     "numberOfIterations": 3,
+     "smartRepeat": false,
+     "endCondition": {
+      "conditionTypeId": 7,
+      "conditionTypeKey": "iterations",
+      "displayOrder": 7,
+      "displayable": false
+     },
+     "endConditionValue": 3,
+     "workoutSteps": [
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 8,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Cuesta con ritmo en la 1ra mitad (bajada y subida)"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 9,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Recupero en la 2da mitad"
+      }
+     ]
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 10,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Pausa: bajada cuesta Oeste, rambla y escalera"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 11,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Ídem el bloque 3"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,196 @@
+{
+ "workoutName": "S17 · Pirámide",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 1920,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "RepeatGroupDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 6,
+      "stepTypeKey": "repeat",
+      "displayOrder": 6
+     },
+     "numberOfIterations": 4,
+     "smartRepeat": false,
+     "endCondition": {
+      "conditionTypeId": 7,
+      "conditionTypeKey": "iterations",
+      "displayOrder": 7,
+      "displayable": false
+     },
+     "endConditionValue": 4,
+     "workoutSteps": [
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 2,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 30,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Ritmo fuerte"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 3,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 30,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Ritmo suave"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 4,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 60,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Ritmo fuerte"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 5,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 60,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Ritmo suave"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 6,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 90,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Ritmo fuerte"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 7,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 90,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Ritmo suave"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 8,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 2,
+        "conditionTypeKey": "time",
+        "displayOrder": 2,
+        "displayable": true
+       },
+       "endConditionValue": 120,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "2 min de trote suave entre cada pirámide."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,242 @@
+{
+ "workoutName": "S10 · Ritmo + cuestas",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 0,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "1er tramo Rambla, desde la escalera hasta Buceo Este"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 2,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "2do tramo Buceo Este"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 3,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "3er tramo Buceo Oeste"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 4,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "4to tramo Rambla, desde Buceo Oeste hasta la escalera"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 5,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "0 nº1 Sentido normal"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 6,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "0 nº2 Arrancando en sentido contrario"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 7,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Macropausa por la escalera"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 8,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Mismo trabajo, pero empezando bajando por Buceo Este y terminando por Buceo Oeste"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 9,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Bajo la escalera"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 10,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Ídem los dos primeros, pero arrancando el 1er tramo suave y el siguiente fuerte"
+    }
+   ]
+  }
+ ]
+}

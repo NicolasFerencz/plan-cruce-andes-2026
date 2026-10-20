@@ -1,0 +1,130 @@
+{
+ "workoutName": "S12 · Ritmo + cuestas",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 0,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "RepeatGroupDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 6,
+      "stepTypeKey": "repeat",
+      "displayOrder": 6
+     },
+     "numberOfIterations": 3,
+     "smartRepeat": false,
+     "endCondition": {
+      "conditionTypeId": 7,
+      "conditionTypeKey": "iterations",
+      "displayOrder": 7,
+      "displayable": false
+     },
+     "endConditionValue": 3,
+     "workoutSteps": [
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 2,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Cada subida a ritmo controlado"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 3,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Cada bajada a ritmo fuerte"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 4,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Transferencia: trote ágil desde Av. Italia hasta Presidente Oribe"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 5,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "De ahí hasta Ramón Anador, ida y vuelta, trote suave"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

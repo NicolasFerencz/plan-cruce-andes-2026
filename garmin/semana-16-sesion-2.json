@@ -1,0 +1,89 @@
+{
+ "workoutName": "S16 · Ritmo + cuestas",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 0,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "RepeatGroupDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 6,
+      "stepTypeKey": "repeat",
+      "displayOrder": 6
+     },
+     "numberOfIterations": 8,
+     "smartRepeat": false,
+     "endCondition": {
+      "conditionTypeId": 7,
+      "conditionTypeKey": "iterations",
+      "displayOrder": 7,
+      "displayable": false
+     },
+     "endConditionValue": 8,
+     "workoutSteps": [
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 2,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 3,
+        "conditionTypeKey": "distance",
+        "displayOrder": 3,
+        "displayable": true
+       },
+       "endConditionValue": 400,
+       "preferredEndConditionUnit": {
+        "unitKey": "meter"
+       },
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Fuerte: acelero cuando arranca la subida, hasta el punto más alto (probablemente el mojón del Liceo Francés)"
+      },
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 3,
+       "stepType": {
+        "stepTypeId": 4,
+        "stepTypeKey": "recovery",
+        "displayOrder": 4
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Trote recuperando hasta el mojón de 26 de Marzo y doy la vuelta"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

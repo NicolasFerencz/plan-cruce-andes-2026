@@ -1,5 +1,5 @@
 /* Cache-first: una vez abierta, la app funciona sin señal. */
-var CACHE = "plan-cruce-v3";
+var CACHE = "plan-cruce-v4";
 var CORE = ["./", "./index.html", "./manifest.webmanifest",
             "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png",
             "./apple-touch-icon.png", "./favicon-32.png"];
@@ -17,6 +17,7 @@ self.addEventListener("activate", function(e){
 
 self.addEventListener("fetch", function(e){
   if(e.request.method !== "GET") return;
+  if(new URL(e.request.url).origin !== location.origin) return;   // la API de GitHub va siempre a la red
   e.respondWith(
     caches.match(e.request).then(function(hit){
       if(hit) return hit;

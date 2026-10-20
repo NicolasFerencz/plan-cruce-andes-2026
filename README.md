@@ -23,7 +23,30 @@ Queda con ícono propio, a pantalla completa y funciona sin señal.
 | `sw.js` | Service worker: cache-first, habilita el uso offline |
 | `manifest.webmanifest` | Metadatos de la app instalable |
 | `fit/` | Un `.fit` por trabajo (entrenamiento estructurado para Garmin) y un `.zip` con todos |
+| `garmin/` | El mismo trabajo en JSON de Garmin Connect (lo que sube "Hacer hoy") |
+| `.github/workflows/garmin.yml`, `scripts/` | El botón "Hacer hoy" y el login a Garmin |
 | `icon-*.png`, `apple-touch-icon.png` | Íconos |
+
+## Hacer hoy → Garmin Connect → reloj
+
+El botón **⌚ Hacer hoy** de cada sesión dispara el workflow `garmin.yml`, que sube ese
+trabajo a Garmin Connect (con [python-garminconnect](https://github.com/cyberjunky/python-garminconnect),
+no oficial) y lo agenda para hoy. Antes borra el que haya subido el plan la vez anterior,
+así en Garmin queda uno solo. El reloj lo recibe en el próximo sync y lo ofrece como
+entrenamiento del día.
+
+Puesta en marcha (una vez):
+
+1. **Token de GitHub**: en GitHub → Settings → Developer settings → Fine-grained tokens, crear uno
+   sólo para este repo con permisos **Actions: Read and write** y **Secrets: Read and write**.
+   Guardarlo como secret del repo: `gh secret set GH_PAT` (el workflow lo usa para guardar la
+   sesión de Garmin cuando se renueva).
+2. **Sesión de Garmin**: `pip install garminconnect && python3 scripts/garmin_login.py`.
+   Pide mail, contraseña y código; guarda sólo los tokens en el secret `GARMIN_TOKENS`.
+3. **En el celu**: tocar "Hacer hoy" una vez y pegar el mismo token. Queda guardado en ese
+   celular (en la app instalada, no en Safari).
+
+Si Garmin invalida la sesión, el botón muestra "✕ Falló": repetir el paso 2.
 
 ## Notas
 

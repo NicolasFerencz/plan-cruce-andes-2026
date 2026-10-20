@@ -1,0 +1,152 @@
+{
+ "workoutName": "S10 · Cuestas",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 0,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "RepeatGroupDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 6,
+      "stepTypeKey": "repeat",
+      "displayOrder": 6
+     },
+     "numberOfIterations": 2,
+     "smartRepeat": false,
+     "endCondition": {
+      "conditionTypeId": 7,
+      "conditionTypeKey": "iterations",
+      "displayOrder": 7,
+      "displayable": false
+     },
+     "endConditionValue": 2,
+     "workoutSteps": [
+      {
+       "type": "ExecutableStepDTO",
+       "stepOrder": 2,
+       "stepType": {
+        "stepTypeId": 3,
+        "stepTypeKey": "interval",
+        "displayOrder": 3
+       },
+       "endCondition": {
+        "conditionTypeId": 1,
+        "conditionTypeKey": "lap.button",
+        "displayOrder": 1,
+        "displayable": true
+       },
+       "endConditionValue": null,
+       "targetType": {
+        "workoutTargetTypeId": 1,
+        "workoutTargetTypeKey": "no.target",
+        "displayOrder": 1
+       },
+       "description": "Por el cantero de Propios, desde Ramos hasta Av. Italia y regreso"
+      }
+     ]
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 3,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Pausa: cantero de Propios y bajo por la cuesta Buceo Este"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 4,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "1º Parabrisas desde Buceo Este — énfasis en la subida"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 5,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "2º Parabrisas — énfasis en la bajada"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 6,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "3º Parabrisas — énfasis en la subida"
+    }
+   ]
+  }
+ ]
+}

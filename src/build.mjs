@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { encodeWorkout, zip } from "./fit.mjs";
+import { encodeWorkout, garminWorkout, zip } from "./fit.mjs";
 
 const DIR = new URL(".", import.meta.url).pathname;
 const src = fs.readFileSync(DIR + "src-page.html", "utf8");
@@ -91,7 +91,55 @@ const runtime = `
     });
   }
 
-  /* 3. Tooltip del gráfico (sólo con mouse; en el celu mandan las etiquetas). */
+  /* 3. "Hacer hoy": dispara el workflow que lo sube a Garmin Connect y lo agenda para hoy. */
+  var API = "https://api.github.com/repos/NicolasFerencz/plan-cruce-andes-2026/actions/workflows/garmin.yml";
+  var KEY = "gh-token";
+  function token(force){
+    var t = null;
+    try{ t = localStorage.getItem(KEY); }catch(e){}
+    if(!t || force){
+      t = prompt("Pegá el token de GitHub (se guarda sólo en este celular):", "");
+      if(t){ t = t.trim(); try{ localStorage.setItem(KEY, t); }catch(e){} }
+    }
+    return t;
+  }
+  function gh(path, opts){
+    opts = opts || {};
+    opts.headers = { "Authorization": "Bearer " + token(), "Accept": "application/vnd.github+json" };
+    return fetch(API + path, opts);
+  }
+  function estado(b, st, txt){ if(st) b.setAttribute("data-st", st); else b.removeAttribute("data-st"); b.textContent = txt; }
+  function seguir(b, desde, intentos){
+    if(intentos <= 0) return estado(b, "err", "⌚ Sin respuesta");
+    setTimeout(function(){
+      gh("/runs?event=workflow_dispatch&per_page=5&created=" + encodeURIComponent(">=" + desde)).then(function(r){ return r.json(); })
+        .then(function(j){
+          var run = (j.workflow_runs || []).filter(function(x){ return x.display_title.indexOf(b.dataset.wo) >= 0; })[0];
+          if(!run || run.status !== "completed") return seguir(b, desde, intentos - 1);
+          if(run.conclusion === "success") estado(b, "ok", "✓ En Garmin");
+          else { estado(b, "err", "✕ Falló"); b.title = run.html_url; }
+        }).catch(function(){ seguir(b, desde, intentos - 1); });
+    }, 5000);
+  }
+  [].forEach.call(document.querySelectorAll("button.hoy"), function(b){
+    b.hidden = false;
+    b.addEventListener("click", function(){
+      if(b.getAttribute("data-st") === "run") return;
+      if(!token()) return;
+      var d = new Date(), hoy = new Date(d.getTime() - d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+      var desde = new Date(Date.now() - 60e3).toISOString().slice(0,19) + "Z";
+      estado(b, "run", "⌚ Enviando…");
+      gh("/dispatches", { method:"POST", body: JSON.stringify({ ref:"main", inputs:{ trabajo:b.dataset.wo, fecha:hoy } }) })
+        .then(function(r){
+          if(r.status === 204) return seguir(b, desde, 36);
+          if(r.status === 401 || r.status === 403) token(true);
+          estado(b, "err", "✕ Error " + r.status);
+        })
+        .catch(function(){ estado(b, "err", "✕ Sin conexión"); });
+    });
+  });
+
+  /* 4. Tooltip del gráfico (sólo con mouse; en el celu mandan las etiquetas). */
   var tip = document.getElementById("tip"), ch = document.getElementById("chart");
   if(tip && ch){
     ch.addEventListener("pointerover", function(e){
@@ -110,17 +158,21 @@ const runtime = `
 })();
 </script>`;
 
-/* ---- un .FIT por trabajo, más un zip con todos ---- */
-fs.rmSync(DIR + "fit", { recursive:true, force:true });
-fs.mkdirSync(DIR + "fit");
+/* ---- un .FIT por trabajo, más un zip con todos; y el mismo trabajo en JSON de Garmin Connect ---- */
+for (const d of ["fit", "garmin"]) {
+  fs.rmSync(DIR + d, { recursive:true, force:true });
+  fs.mkdirSync(DIR + d);
+}
 const all = [];
 for (const w of WEEKS) w.s.forEach((s, i) => {
   const work = s.ref ? LIB[s.ref[0]].items[s.ref[1]] : s.cont ? CONT[s.cont] : null;
   if (!work) return;
-  const file = `semana-${String(w.n).padStart(2,"0")}-sesion-${i+1}.fit`;
+  const base = `semana-${String(w.n).padStart(2,"0")}-sesion-${i+1}`, file = base + ".fit";
   const { bytes, steps } = encodeWorkout(`S${w.n} · ${s.tag}`, work.wo);
   if (steps > 50) console.warn(`ojo: ${file} tiene ${steps} pasos (algunos relojes cortan en 50)`);
   fs.writeFileSync(DIR + "fit/" + file, bytes);
+  fs.writeFileSync(DIR + "garmin/" + base + ".json",
+                   JSON.stringify(garminWorkout(`S${w.n} · ${s.tag}`, work.wo), null, 1));
   all.push({ name: file, bytes });
 });
 fs.writeFileSync(DIR + "fit/plan-cruce-garmin.zip", zip(all));

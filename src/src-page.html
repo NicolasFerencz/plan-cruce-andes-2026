@@ -137,10 +137,15 @@
   .k-col{display:flex;flex-direction:column;gap:3px}
   .k-name{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.07em;
     text-transform:uppercase;color:var(--ink-2);font-weight:500}
-  a.fit{align-self:flex-start;margin-top:4px;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  .fit{align-self:flex-start;margin-top:4px;font-family:"IBM Plex Mono",monospace;font-size:10px;
     letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none;font-weight:600;
     border:1px solid var(--line-2);border-radius:999px;padding:2px 8px;background:var(--surface);white-space:nowrap}
-  a.fit:hover{border-color:var(--accent)}
+  .fit:hover{border-color:var(--accent)}
+  button.fit{cursor:pointer;line-height:inherit}
+  button.hoy{background:var(--accent);color:#fff;border-color:var(--accent);padding:4px 10px}
+  button.hoy[data-st]{background:var(--surface);color:var(--accent)}
+  button.hoy[data-st="ok"]{color:#2f7d4f;border-color:#2f7d4f}
+  button.hoy[data-st="err"]{color:#b3412f;border-color:#b3412f}
   .steps{margin:0;padding-left:20px;background:var(--surface);border:1px solid var(--line);border-radius:10px;
     padding:14px 16px 14px 34px;font-size:13.5px;color:var(--ink-2);line-height:1.55}
   .steps li{margin-block:4px}
@@ -329,13 +334,14 @@
       <h2>Pasarlo al Garmin</h2>
       <span class="note">Cada trabajo se baja como entrenamiento estructurado (.FIT)</span>
     </div>
+    <p style="font-size:14px;color:var(--ink-2);margin:0 0 10px">Desde el celu: tocá <b>⌚ Hacer hoy</b> en la sesión del día. En menos de un minuto aparece en Garmin Connect agendada para hoy, y el reloj la toma en el próximo sync: al iniciar una carrera te ofrece el <b>entrenamiento de hoy</b>. La primera vez pide el token de GitHub. Sin internet, o para cargarlos todos de una, queda el método por cable:</p>
     <ol class="steps">
-      <li>Desde la compu, tocá <b>↓ Garmin</b> en la sesión que quieras, o bajá el <b>.zip</b> con todos y descomprimilo.</li>
+      <li>Desde la compu, tocá <b>↓ .fit</b> en la sesión que quieras, o bajá el <b>.zip</b> con todos y descomprimilo.</li>
       <li>Conectá el reloj por USB. Si la Mac no lo muestra como disco, abrilo con <b>OpenMTP</b> (gratis).</li>
       <li>Copiá los <code>.fit</code> a la carpeta <code>GARMIN/NewFiles</code> del reloj y desconectalo.</li>
       <li>En el reloj: <b>Entrenamiento → Entrenamientos</b>. Cada uno se llama <code>S9 · Ritmo</code>, <code>S10 · Cuestas</code>, etc.</li>
     </ol>
-    <p class="foot" style="margin-top:10px;font-size:12px;color:var(--ink-3)">Los pasos con tiempo o distancia avanzan solos. Los de recorrido (tramos, cuestas, parabrisas) quedan como “hasta tocar LAP”: los pasás vos con el botón de vuelta. Desde el iPhone se baja el archivo pero no se puede pasar al reloj.</p>
+    <p class="foot" style="margin-top:10px;font-size:12px;color:var(--ink-3)">Los pasos con tiempo o distancia avanzan solos. Los de recorrido (tramos, cuestas, parabrisas) quedan como “hasta tocar LAP”: los pasás vos con el botón de vuelta.</p>
   </section>
 
   <section id="glosario">
@@ -1024,7 +1030,7 @@ document.getElementById("weeks").innerHTML=WEEKS.map(w=>{
     const det=work?`<details class="work"${w===nowWeek?" open":""}>
         <summary><span class="ar">›</span> Ver el trabajo</summary>${diagram(work)}</details>`:"";
     return `<li>
-      <div class="k-col"><span class="k-name">${s.k}</span><span class="tag">${s.tag}</span>${work?`<a class="fit" href="${fitFile(w.n,i)}" download title="Entrenamiento estructurado para el reloj">↓ Garmin</a>`:""}</div>
+      <div class="k-col"><span class="k-name">${s.k}</span><span class="tag">${s.tag}</span>${work?`<button class="fit hoy" data-wo="${fitFile(w.n,i).slice(4,-4)}" hidden title="Cargarlo en Garmin Connect para hoy">⌚ Hacer hoy</button><a class="fit" href="${fitFile(w.n,i)}" download title="Entrenamiento estructurado para el reloj">↓ .fit</a>`:""}</div>
       <div class="body-col"><div class="title">${markup(legible(s.t))}</div>${det}</div>
     </li>`;
   }).join("");

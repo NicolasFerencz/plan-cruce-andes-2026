@@ -1,0 +1,242 @@
+{
+ "workoutName": "S2 · Ritmo + cuestas",
+ "description": "Plan Cruce de los Andes 2026",
+ "sportType": {
+  "sportTypeId": 1,
+  "sportTypeKey": "running",
+  "displayOrder": 1
+ },
+ "estimatedDurationInSecs": 0,
+ "workoutSegments": [
+  {
+   "segmentOrder": 1,
+   "sportType": {
+    "sportTypeId": 1,
+    "sportTypeKey": "running",
+    "displayOrder": 1
+   },
+   "workoutSteps": [
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 1,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "1er tramo Desde la escalera hasta Buceo Oeste"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 2,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "2do tramo Primera mitad de Buceo Oeste"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 3,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "3er tramo Segunda mitad de Buceo O."
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 4,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "4to tramo Propios hasta Verdi"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 5,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "1er tramo Propios, desde Verdi hasta la cuesta"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 6,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "2do tramo Primera mitad de la cuesta Buceo Este"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 7,
+     "stepType": {
+      "stepTypeId": 4,
+      "stepTypeKey": "recovery",
+      "displayOrder": 4
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "3er tramo Segunda mitad de Buceo Este"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 8,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "4to tramo Rambla hasta la escalera central"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 9,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Ídem 1 y 2, pero arrancando el primer tramo fuerte"
+    },
+    {
+     "type": "ExecutableStepDTO",
+     "stepOrder": 10,
+     "stepType": {
+      "stepTypeId": 3,
+      "stepTypeKey": "interval",
+      "displayOrder": 3
+     },
+     "endCondition": {
+      "conditionTypeId": 1,
+      "conditionTypeKey": "lap.button",
+      "displayOrder": 1,
+      "displayable": true
+     },
+     "endConditionValue": null,
+     "targetType": {
+      "workoutTargetTypeId": 1,
+      "workoutTargetTypeKey": "no.target",
+      "displayOrder": 1
+     },
+     "description": "Ídem bloques 1 y 2"
+    }
+   ]
+  }
+ ]
+}

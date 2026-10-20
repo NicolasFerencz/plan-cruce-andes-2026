@@ -168,6 +168,48 @@ export function encodeWorkout(name, nodes){
   return { bytes: body, steps: flat.length };
 }
 
+/* ------------------------------------------------- JSON para Garmin Connect */
+/* Mismos pasos que el .FIT, en el formato de workout-service (lo que sube el
+   botón "Hacer hoy" vía GitHub Actions). Tiempo en segundos, distancia en metros. */
+const GC_STEP = {
+  [INT.warmup]:   { stepTypeId:1, stepTypeKey:"warmup",   displayOrder:1 },
+  [INT.cooldown]: { stepTypeId:2, stepTypeKey:"cooldown", displayOrder:2 },
+  [INT.active]:   { stepTypeId:3, stepTypeKey:"interval", displayOrder:3 },
+  [INT.recovery]: { stepTypeId:4, stepTypeKey:"recovery", displayOrder:4 },
+};
+const GC_END = {
+  0: { conditionTypeId:2, conditionTypeKey:"time",       displayOrder:2, displayable:true },
+  1: { conditionTypeId:3, conditionTypeKey:"distance",   displayOrder:3, displayable:true },
+  5: { conditionTypeId:1, conditionTypeKey:"lap.button", displayOrder:1, displayable:true },
+};
+const NO_TARGET = { workoutTargetTypeId:1, workoutTargetTypeKey:"no.target", displayOrder:1 };
+
+export function garminWorkout(name, nodes){
+  let order = 0, secs = 0;
+  const steps = (list, mult = 1) => list.map(s => {
+    if(s.reps){
+      const g = { type:"RepeatGroupDTO", stepOrder:++order,
+        stepType:{ stepTypeId:6, stepTypeKey:"repeat", displayOrder:6 },
+        numberOfIterations:s.reps, smartRepeat:false,
+        endCondition:{ conditionTypeId:7, conditionTypeKey:"iterations", displayOrder:7, displayable:false },
+        endConditionValue:s.reps };
+      g.workoutSteps = steps(s.steps, mult * s.reps);
+      return g;
+    }
+    const value = s.dur.type === 0 ? s.dur.value / 1000 : s.dur.type === 1 ? s.dur.value / 100 : null;
+    if(s.dur.type === 0) secs += value * mult;
+    return { type:"ExecutableStepDTO", stepOrder:++order, stepType:GC_STEP[s.int],
+             endCondition:GC_END[s.dur.type], endConditionValue:value,
+             ...(s.dur.type === 1 && { preferredEndConditionUnit:{ unitKey:"meter" } }),
+             targetType:NO_TARGET, description:(s.notes || s.name).slice(0, 512) };
+  });
+  const running = { sportTypeId:1, sportTypeKey:"running", displayOrder:1 };
+  const workoutSteps = steps(convert(nodes));
+  return { workoutName:name, description:"Plan Cruce de los Andes 2026", sportType:running,
+           estimatedDurationInSecs:Math.round(secs),
+           workoutSegments:[{ segmentOrder:1, sportType:running, workoutSteps }] };
+}
+
 /* ------------------------------------------------------------ zip sin compresión */
 const CRC32 = (() => { const t = new Uint32Array(256);
   for(let n = 0; n < 256; n++){ let c = n; for(let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }

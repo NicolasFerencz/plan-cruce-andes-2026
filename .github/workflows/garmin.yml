@@ -1,0 +1,47 @@
+# "Hacer hoy": sube un trabajo a Garmin Connect y lo agenda para la fecha dada.
+# Lo dispara el botón de la página (con el token de GitHub guardado en el celular).
+name: garmin
+run-name: ${{ inputs.trabajo }} · ${{ inputs.fecha }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      trabajo:
+        description: "semana-NN-sesion-N"
+        required: true
+      fecha:
+        description: "AAAA-MM-DD"
+        required: true
+
+concurrency: garmin          # nunca dos a la vez: comparten la sesión de Garmin
+
+jobs:
+  subir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q garminconnect
+      - name: Subir y agendar
+        env:
+          GARMINTOKENS: ${{ secrets.GARMIN_TOKENS }}
+          GARMIN_TOKENS_OUT: ${{ runner.temp }}/tokens.json
+          TRABAJO: ${{ inputs.trabajo }}
+          FECHA: ${{ inputs.fecha }}
+        run: python scripts/garmin_hoy.py "$TRABAJO" "$FECHA"
+      - name: Guardar la sesión renovada
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          OLD: ${{ secrets.GARMIN_TOKENS }}
+          NEW_FILE: ${{ runner.temp }}/tokens.json
+        run: |
+          if [ -s "$NEW_FILE" ] && [ "$(cat "$NEW_FILE")" != "$OLD" ]; then
+            gh secret set GARMIN_TOKENS --repo "$GITHUB_REPOSITORY" < "$NEW_FILE"
+            echo "sesión renovada"
+          fi

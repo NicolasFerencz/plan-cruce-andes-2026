@@ -83,6 +83,7 @@ self.addEventListener("activate", function(e){
 
 self.addEventListener("fetch", function(e){
   if(e.request.method !== "GET") return;
+  if(new URL(e.request.url).origin !== location.origin) return;   // la API de GitHub va siempre a la red
   e.respondWith(
     caches.match(e.request).then(function(hit){
       if(hit) return hit;
@@ -100,8 +101,9 @@ self.addEventListener("fetch", function(e){
 
 (SITE / ".nojekyll").write_text("", encoding="utf-8")
 
-shutil.rmtree(SITE / "fit", ignore_errors=True)
-shutil.copytree(SCRATCH / "fit", SITE / "fit")
+for d in ("fit", "garmin"):
+    shutil.rmtree(SITE / d, ignore_errors=True)
+    shutil.copytree(SCRATCH / d, SITE / d)
 
 print("sitio en", SITE)
 for f in sorted(SITE.iterdir()):
